@@ -4,7 +4,7 @@
     height: 40px;
     border-radius: 9999px;
     animation: .5s steps(30) both;
-    background-image: url(../telegram.svg);
+    background-image: url(https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/telegram.svg);
     background-position: 100% 0%;
     background-repeat: no-repeat;
     background-size: cover;
