@@ -27,13 +27,13 @@
 
 @font-face {
     font-family: Nunito;
-    src: url(Nunito-Regular-DauwyYTf.ttf) format("truetype");
+    src: url(https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/assets/Nunito-Regular-DauwyYTf.ttf) format("truetype");
     font-weight: 400
 }
 
 @font-face {
     font-family: Nunito;
-    src: url(Nunito-Bold-DJt0Orup.ttf) format("truetype");
+    src: url(https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/assets/Nunito-Bold-DJt0Orup.ttf) format("truetype");
     font-weight: 800
 }
 
