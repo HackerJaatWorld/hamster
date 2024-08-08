@@ -1,3 +1,6 @@
+#root{
+    z-index:90000;
+}
 .tg-logo {
     display: block;
     width: 40px;
