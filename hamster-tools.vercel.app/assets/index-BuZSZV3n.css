@@ -1,11 +1,10 @@
-
 .tg-logo {
     display: block;
     width: 40px;
     height: 40px;
     border-radius: 9999px;
     animation: .5s steps(30) both;
-    background-image: url(https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/telegram.svg);
+    background-image: url(../telegram.svg);
     background-position: 100% 0%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -28,13 +27,13 @@
 
 @font-face {
     font-family: Nunito;
-    src: url(https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/assets/Nunito-Regular-DauwyYTf.ttf) format("truetype");
+    src: url(Nunito-Regular-DauwyYTf.ttf) format("truetype");
     font-weight: 400
 }
 
 @font-face {
     font-family: Nunito;
-    src: url(https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/assets/Nunito-Bold-DJt0Orup.ttf) format("truetype");
+    src: url(Nunito-Bold-DJt0Orup.ttf) format("truetype");
     font-weight: 800
 }
 
@@ -875,7 +874,17 @@ body {
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
+#radix-\:r0\:-content-bike>div>div:nth-child(2)>ul,
+#radix-\:r0\:-content-clone>div>div:nth-child(2)>ul,
+#radix-\:r0\:-content-cube>div>div:nth-child(2)>ul,
+#radix-\:r0\:-content-train>div>div:nth-child(2)>ul {
+    max-height: 400px;
+    overflow: auto;
+}
 
-#root{
-    z-index:90000;
+#radix-\:r0\:-content-bike > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary,
+#radix-\:r0\:-content-clone > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary,
+#radix-\:r0\:-content-cube > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary,
+#radix-\:r0\:-content-train > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary{
+    margin-bottom: 20px;
 }
