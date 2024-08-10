@@ -11183,6 +11183,16 @@ const L0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
    M0 = "43e35910-c168-4634-ad4f-52fd764a843f",
    xo = new Ul(L0, M0);
 
+const handleMore = () => {
+   console.log("Button was clicked!");
+
+   // Toggle the visibility
+   const root = document.getElementById("root");
+   const rootMore = document.getElementById("root_more");
+   root.style.display = 'none';
+   rootMore.style.display = 'block';
+};
+
 function A0() {
    const [e, t] = x.useState([null, null, null, null]),
       n = zs((c => c.status)), // Status of generation
@@ -11190,6 +11200,8 @@ function A0() {
       [o, l] = x.useState(0),
       { copy: i } = Vl(),
       s = Kl();
+
+
 
    // Copy All Codes
    const copyAllCodes = () => {
@@ -11282,7 +11294,12 @@ function A0() {
                   v.jsx(ft, {
                      onClick: copyAllCodes,
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "Copy All Codes"
+                     children: "Copy All"
+                  }),
+                  v.jsx(ft, {
+                     onClick: handleMore,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "More"
                   })
                ]
             })
@@ -11403,7 +11420,12 @@ function F0() {
                   v.jsx(ft, {
                      onClick: copyAllCodes,
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "Copy All Codes"
+                     children: "Copy All"
+                  }),
+                  v.jsx(ft, {
+                     onClick: handleMore,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "More"
                   })
                ]
             })
@@ -11526,7 +11548,12 @@ function b0() {
                   v.jsx(ft, {
                      onClick: copyAllCodes,
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "Copy All Codes"
+                     children: "Copy All"
+                  }),
+                  v.jsx(ft, {
+                     onClick: handleMore,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "More"
                   })
                ]
             })
@@ -11648,7 +11675,12 @@ function B0() {
                   v.jsx(ft, {
                      onClick: copyAllCodes,
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "Copy All Codes"
+                     children: "Copy All"
+                  }),
+                  v.jsx(ft, {
+                     onClick: handleMore,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "More"
                   })
                ]
             })
