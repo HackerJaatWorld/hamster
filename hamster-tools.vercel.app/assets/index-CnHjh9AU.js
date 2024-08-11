@@ -9675,13 +9675,13 @@ function Sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "0.5.0"]
+            children: ["version: ", "0.6.0"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
          children: [v.jsxs(hp, {
             children: [v.jsx(vp, {
-               src: "/favicon.webp"
+               src: "https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/favicon.webp"
             }), v.jsx(gp, {
                children: "CN"
             })]
@@ -11183,15 +11183,14 @@ const L0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
    M0 = "43e35910-c168-4634-ad4f-52fd764a843f",
    xo = new Ul(L0, M0);
 
-const handleMore = () => {
-   console.log("Button was clicked!");
-
-   // Toggle the visibility
-   const root = document.getElementById("root");
-   const rootMore = document.getElementById("root_more");
-   root.style.display = 'none';
-   rootMore.style.display = 'block';
-};
+ const handleMore = () => {
+    console.log("Button was clicked!");
+    // Toggle the visibility
+    const root = document.getElementById("root");
+    const rootMore = document.getElementById("root_more");
+    root.style.display = 'none';
+    rootMore.style.display = 'block';
+ };
 
 function A0() {
    const [e, t] = x.useState([null, null, null, null]),
@@ -11296,11 +11295,11 @@ function A0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                  v.jsx(ft, {
-                     onClick: handleMore,
-                     disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "More"
-                  })
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
                ]
             })
          })
@@ -11422,11 +11421,11 @@ function F0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                  v.jsx(ft, {
-                     onClick: handleMore,
-                     disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "More"
-                  })
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
                ]
             })
          })
@@ -11550,11 +11549,11 @@ function b0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                  v.jsx(ft, {
-                     onClick: handleMore,
-                     disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "More"
-                  })
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
                ]
             })
          })
@@ -11677,11 +11676,11 @@ function B0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                  v.jsx(ft, {
-                     onClick: handleMore,
-                     disabled: "wait" === n, // Disable copy button if generate button is disabled
-                     children: "More"
-                  })
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
                ]
             })
          })
