@@ -11150,27 +11150,29 @@ function Kl() {
         onError: t
     })
 }
+
+const handleClose = () => {
+    console.log("Button was clicked!");
+
+    // Toggle the visibility
+    const root = document.getElementById("root");
+    const rootMore = document.getElementById("root_more");
+    rootMore.style.display = 'none';
+    root.style.display = 'flex';
+};
+
 const L0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
     M0 = "43e35910-c168-4634-ad4f-52fd764a843f",
     xo = new Ul(L0, M0);
 
     function A0() {
-        const [e, t] = x.useState(Array(8).fill(null)); // State to hold 20 promo codes
+        const [e, t] = x.useState(Array(20).fill(null)); // State to hold 20 promo codes
         const n = zs(c => c.status); // Status of generation
         const r = zs(c => c.setStatus);
         const [o, l] = x.useState(0);
         const { copy: i } = Vl();
         const s = Kl();
     
-        const handleClose = () => {
-            console.log("Button was clicked!");
-    
-            // Toggle the visibility
-            const root = document.getElementById("root");
-            const rootMore = document.getElementById("root_more");
-            rootMore.style.display = 'none';
-            root.style.display = 'flex';
-        };
     
         // Copy All Codes
         const copyAllCodes = () => {
@@ -11188,18 +11190,18 @@ const L0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
         // Generate 20 promo codes
         const generateCodes = async () => {
             try {
-                t(Array(8).fill(null)); // Prepare space for 20 codes
+                t(Array(20).fill(null)); // Prepare space for 20 codes
                 r("wait");
                 l(0);
                 s();
-                const codes = await Promise.all(Array(8).fill(null).map(() => xo.generate()));
+                const codes = await Promise.all(Array(20).fill(null).map(() => xo.generate()));
                 t(codes);
                 r("done");
                 l(100);
             } catch (error) {
                 console.log("Error:", error);
                 Mt("Error");
-                t(Array(8).fill(null)); // Reset the state in case of error
+                t(Array(20).fill(null)); // Reset the state in case of error
                 r("idle");
                 l(0);
             }
@@ -11503,6 +11505,8 @@ const V0 = "d1690a07-3780-4068-810f-9b5bbf2931b2",
                                 children: "Copy All"
                             }),
                             v.jsx(ft, {
+                                onClick: () => { handleClose(); }, // Define handleClose function if needed
+                                disabled: "wait" === n, // Disable close button if generate button is disabled
                                 children: "Close"
                             })
                         ]
@@ -11620,6 +11624,8 @@ const W0 = "82647f43-3f87-402d-88dd-09a90025313f",
                                 children: "Copy All"
                             }),
                             v.jsx(ft, {
+                                onClick: () => { handleClose(); }, // Define handleClose function if needed
+                                disabled: "wait" === n, // Disable close button if generate button is disabled
                                 children: "Close"
                             })
                         ]
