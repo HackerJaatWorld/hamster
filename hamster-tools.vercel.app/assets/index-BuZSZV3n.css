@@ -874,39 +874,13 @@ body {
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
 }
 
-/* #radix-\:r0\:-content-bike>div>div:nth-child(2)>ul,
-#radix-\:r0\:-content-clone>div>div:nth-child(2)>ul,
-#radix-\:r0\:-content-cube>div>div:nth-child(2)>ul,
-#radix-\:r0\:-content-train>div>div:nth-child(2)>ul {
-    max-height: 400px;
-    overflow: auto;
-}
-
-#radix-\:r0\:-content-bike > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary,
-#radix-\:r0\:-content-clone > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary,
-#radix-\:r0\:-content-cube > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary,
-#radix-\:r0\:-content-train > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary{
-    margin-bottom: 20px;
-} */
-
 
 #root > div > div > div.col-span-2.flex.items-center.gap-4.justify-center.mt-4{
     position: fixed;
     bottom: 10px;
 }
 
-#root > div > div > div.relative.h-4.w-full.overflow-hidden.rounded-full.bg-secondary{
-    position: fixed;
-    top: 10px;
-}
-
-#root > div > div{
-    margin: 60px;
-}
-
-#root > div > div > p{
-    width: 50%;
-    position: fixed;
-    top: 20px;
-    font-weight: 900;
+#root > div > div > div > div > div.flex.flex-col.space-y-1\.5.p-6{
+    padding: 10px;
+    padding-left: 25px;
 }
