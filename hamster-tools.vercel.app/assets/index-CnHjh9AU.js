@@ -11203,8 +11203,9 @@ const components = [
    { name: "Train", instance: Eo }
 ];
 
+
 function G0() {
-   const [codes, setCodes] = x.useState(Array(4).fill([null, null, null, null]));
+   const [codes, setCodes] = x.useState(Array(4).fill([null]));
    const [status, setStatus] = x.useState("idle");
    const [progress, setProgress] = x.useState(0);
    const { copy } = Vl();
@@ -11212,13 +11213,15 @@ function G0() {
 
    const generateAllCodes = async () => {
       try {
-         setCodes(Array(4).fill([null, null, null, null]));
+         setCodes(Array(4).fill([null]));
          setStatus("wait");
          setProgress(0);
          s();
 
          const generatedCodes = await Promise.all(components.map(component =>
-            Promise.all([component.instance.generate(), component.instance.generate(), component.instance.generate(), component.instance.generate()])
+            Promise.all([
+               component.instance.generate(),
+            ])
          ));
 
          setCodes(generatedCodes);
@@ -11227,22 +11230,35 @@ function G0() {
       } catch (error) {
          console.log("Error:", error);
          Mt("Error");
-         setCodes(Array(4).fill([null, null, null, null]));
+         setCodes(Array(4).fill([null]));
          setStatus("idle");
          setProgress(0);
       }
    };
 
    const copyAllCodes = () => {
-      const allCodes = codes.flat().filter(Boolean).join("\n");
-      copy(allCodes);
-      Mt(v.jsxs("div", {
-         className: "flex justify-center items-center",
-         children: [
-            v.jsx(Ml, { size: 16, className: "mr-2" }),
-            v.jsx("span", { children: "All Codes Copied!" })
-         ]
-      }));
+      const allCodes = codes.filter(Boolean).flat().join("\n");
+      if (allCodes) {
+         copy(allCodes);
+         alert("All Codes Copied")
+         Mt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Ml, { size: 16, className: "mr-2" }),
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         alert("No codes to copy");
+         Mt(v.jsxs("div", {
+            id : 'dfhdfhsdkfksdfg',
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Ml, { size: 16, className: "mr-2" }),
+               v.jsx("span", { children: "No codes to copy!" })
+            ]
+         }));
+      }
    };
 
    x.useEffect(() => {
@@ -11267,7 +11283,7 @@ function G0() {
                         children: [
                            v.jsx(Br, { children: gameNames[index] }),
                            v.jsxs(Gr, {
-                              children: ["Click ", v.jsx("b", { children: "Generate All" }), " to use"]
+                              children: ["Copy to  ", v.jsx("b", { children: "Redeem" }), " code"]
                            })
                         ]
                      }),
@@ -11284,14 +11300,13 @@ function G0() {
                                        size: "sm",
                                        onClick: () => function copyCode(c) {
                                           copy(c);
+                                          alert("Copied");
                                           Mt(v.jsxs("div", {
                                              className: "flex justify-center items-center",
-                                             children: [v.jsx(Ml, {
-                                                size: 16,
-                                                className: "mr-2"
-                                             }), " ", v.jsx("span", {
-                                                children: "Copied!"
-                                             })]
+                                             children: [
+                                                v.jsx(Ml, { size: 16, className: "mr-2" }),
+                                                v.jsx("span", { children: "Copied!" })
+                                             ]
                                           }));
                                        }(code),
                                        disabled: !code,
@@ -11316,7 +11331,7 @@ function G0() {
             children: [
                v.jsxs(ft, {
                   onClick: generateAllCodes,
-                  disabled: status === "wait",
+                  disabled: status === "done",
                   children: [
                      v.jsx($l, { size: 16, className: "mr-2" }),
                      "Generate All"
@@ -11324,22 +11339,26 @@ function G0() {
                }),
                v.jsx(ft, {
                   onClick: copyAllCodes,
-                  disabled: status === "wait",
+                  disabled: status === "done",
                   children: "Copy All"
                }),
                v.jsxs("div", {
-                  children: [v.jsxs("p", {
-                     children: [(null == Se ? void 0 : Se.first_name) ?? "Nikname", " ", (null == Se ? void 0 : Se.last_name) ?? ""]
-                  }), v.jsx("p", {
-                     className: "text-sm text-muted-foreground",
-                     children: null != Se && Se.username ? `@${Se.username}` : (null == Se ? void 0 : Se.id) ?? "@username"
-                  })]
+                  children: [
+                     v.jsxs("p", {
+                        children: [(null == Se ? void 0 : Se.first_name) ?? "Nikname", " ", (null == Se ? void 0 : Se.last_name) ?? ""]
+                     }),
+                     v.jsx("p", {
+                        className: "text-sm text-muted-foreground",
+                        children: null != Se && Se.username ? `@${Se.username}` : (null == Se ? void 0 : Se.id) ?? "@username"
+                     })
+                  ]
                })
             ]
          })
       ]
    });
 }
+
 
 
 
