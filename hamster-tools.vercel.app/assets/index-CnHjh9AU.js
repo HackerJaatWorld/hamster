@@ -11331,7 +11331,7 @@ function G0() {
             children: [
                v.jsxs(ft, {
                   onClick: generateAllCodes,
-                  disabled: status === "done",
+                  disabled: status === "wait",
                   children: [
                      v.jsx($l, { size: 16, className: "mr-2" }),
                      "Generate All"
@@ -11339,7 +11339,7 @@ function G0() {
                }),
                v.jsx(ft, {
                   onClick: copyAllCodes,
-                  disabled: status === "done",
+                  disabled: status === "wait",
                   children: "Copy All"
                }),
                v.jsxs("div", {
