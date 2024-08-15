@@ -9677,7 +9677,7 @@ function Sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "0.7.5"]
+            children: ["version: ", "0.7.6"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
@@ -11185,14 +11185,173 @@ const L0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
    M0 = "43e35910-c168-4634-ad4f-52fd764a843f",
    xo = new Ul(L0, M0);
 
- const handleMore = () => {
-    console.log("Button was clicked!");
-    // Toggle the visibility
-    const root = document.getElementById("root");
-    const rootMore = document.getElementById("root_more");
-    root.style.display = 'none';
-    rootMore.style.display = 'block';
- };
+const handleMore = () => {
+   console.log("Button was clicked!");
+   // Toggle the visibility
+   const root = document.getElementById("root");
+   const rootMore = document.getElementById("root_more");
+   root.style.display = 'none';
+   rootMore.style.display = 'block';
+};
+
+
+// function usersaveStatus(bike, clone, cube, train) {
+//    const gStatus = {
+//        'bike': bike,
+//        'clone': clone,
+//        'cube': cube,
+//        'train': train,
+//    };
+//    localStorage.setItem("generate_code", JSON.stringify(gStatus));
+// }
+
+function gameTime(bikeTime, cloneTime, cubeTime, trainTime) {
+   const gStatus = {
+      'bike': bikeTime,
+      'clone': cloneTime,
+      'cube': cubeTime,
+      'train': trainTime,
+   };
+   localStorage.setItem("generate_code_time", JSON.stringify(gStatus));
+}
+
+function checkuserStatus() {
+   return JSON.parse(localStorage.getItem("generate_code_time"));
+}
+
+function initializeStatus() {
+   const status = checkuserStatus();
+
+   // If no status found in localStorage, initialize with default values
+   if (!status) {
+      gameTime(null, null, null, null);
+   } else {
+      updateStatus();
+   }
+}
+
+function startCountdown(game) {
+   const now = new Date().getTime();
+
+   switch (game) {
+      case 'bike':
+         gameTime(now, null, null, null);
+         break;
+      case 'clone':
+         gameTime(null, now, null, null);
+         break;
+      case 'cube':
+         gameTime(null, null, now, null);
+         break;
+      case 'train':
+         gameTime(null, null, null, now);
+         break;
+   }
+}
+
+
+function minutesToMilliseconds(minutes) {
+   return minutes * 60000; // Converts minutes to milliseconds
+}
+
+function updateStatus() {
+   const status = checkuserStatus();
+   const now = new Date().getTime();
+
+   const delay = minutesToMilliseconds(5); // 0.1 minute in milliseconds
+
+   // Prepare variables to pass to gameTime
+   let bikeStatus = status.bike;
+   let cloneStatus = status.clone;
+   let cubeStatus = status.cube;
+   let trainStatus = status.train;
+
+   // Check for each game individually and set the appropriate status to null
+   if (now - status.bike >= delay) {
+       bikeStatus = null;
+   }
+
+   if (now - status.clone >= delay) {
+       cloneStatus = null;
+   }
+
+   if (now - status.cube >= delay) {
+       cubeStatus = null;
+   }
+
+   if (now - status.train >= delay) {
+       trainStatus = null;
+   }
+
+   // Call gameTime once with the updated statuses
+   gameTime(bikeStatus, cloneStatus, cubeStatus, trainStatus);
+}
+
+
+
+function updateButtonStatus(game) {
+   const status = checkuserStatus();
+
+   // Check if the status for the given game is null or not
+   if (status[game] === null) {
+       return false;
+   }else{
+      return true
+   }
+
+   // const now = new Date().getTime();
+
+   // // Check if the current time is less than the status time
+   // return now < status[game];
+}
+
+// function remainingTime(game) {
+//    const status = checkuserStatus();
+//    const now = new Date().getTime();
+   
+//    // Get the remaining time in milliseconds
+//    const remainingTimeInMs = status[game] - now;
+
+//    if (remainingTimeInMs <= 0) {
+//        return "00:00"; // If time is up, return "00:00"
+//    }
+
+//    // Calculate minutes and seconds
+//    const minutes = Math.floor(remainingTimeInMs / 60000);
+//    const seconds = Math.floor((remainingTimeInMs % 60000) / 1000);
+
+//    // Format minutes and seconds as two digits
+//    const formattedMinutes = String(minutes).padStart(2, '0');
+//    const formattedSeconds = String(seconds).padStart(2, '0');
+
+//    return `${formattedMinutes}:${formattedSeconds}`;
+// }
+
+// Example usage: updating the remaining time every second
+// function startTimer(game) {
+//    setInterval(() => {
+//       console.clear();
+//        console.log(remainingTime(game));
+//    }, 1000);
+// }
+
+
+
+// Start the timer for the 'bike' game
+//  startCountdown('bike');
+//  startCountdown('clone');
+//  startCountdown('cube');
+//  startCountdown('train');
+
+
+setInterval(updateStatus, 1000);
+setInterval(updateButtonStatus, 1000);
+
+// Initialize or update the status on page load
+initializeStatus();
+
+
+
 
 function A0() {
    const [e, t] = x.useState([null, null, null, null]),
@@ -11201,8 +11360,6 @@ function A0() {
       [o, l] = x.useState(0),
       { copy: i } = Vl(),
       s = Kl();
-
-
 
    // Copy All Codes
    const copyAllCodes = () => {
@@ -11281,6 +11438,7 @@ function A0() {
                            t(c);
                            r("done");
                            l(100);
+                           startCountdown('bike');
                         } catch (c) {
                            console.log("Error:", c);
                            Mt("Error");
@@ -11289,7 +11447,7 @@ function A0() {
                            l(0);
                         }
                      },
-                     disabled: "wait" === n,
+                     disabled: "wait" === n || updateButtonStatus('bike'),
                      children: [v.jsx($l, { size: 16, className: "mr-2" }), "Generate"]
                   }),
                   v.jsx(ft, {
@@ -11298,9 +11456,9 @@ function A0() {
                      children: "Copy All"
                   }),
                    v.jsx(ft, {
-                      onClick: handleMore,
+                     //  onClick: handleMore,
                       disabled: "wait" === n, // Disable copy button if generate button is disabled
-                      children: "More"
+                      children: "Off Now"
                    })
                ]
             })
@@ -11308,6 +11466,7 @@ function A0() {
       ]
    });
 }
+
 
 
 
@@ -11404,15 +11563,19 @@ function F0() {
                            t(c);
                            r("done");
                            l(100);
+                           startCountdown('clone');
+                           usersaveStatus(checkuserStatus().bike, true, checkuserStatus().cube, checkuserStatus().train);
                         } catch (c) {
                            console.log("Error:", c);
                            Mt("Error");
                            t([null, null, null, null]);
                            r("idle");
                            l(0);
+                           usersaveStatus(checkuserStatus().bike, false, checkuserStatus().cube, checkuserStatus().train);
                         }
                      },
                      disabled: "wait" === n,
+                     disabled: checkuserStatus().clone,
                      children: [
                         v.jsx($l, { size: 16, className: "mr-2" }),
                         "Generate"
@@ -11423,10 +11586,10 @@ function F0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                   v.jsx(ft, {
-                      onClick: handleMore,
+                  v.jsx(ft, {
+                     //  onClick: handleMore,
                       disabled: "wait" === n, // Disable copy button if generate button is disabled
-                      children: "More"
+                      children: "Off Now"
                    })
                ]
             })
@@ -11531,6 +11694,7 @@ function b0() {
                            t(c);
                            r("done");
                            l(100);
+                           startCountdown('cube');
                         } catch (c) {
                            console.log("Error:", c);
                            Mt("Error");
@@ -11540,6 +11704,7 @@ function b0() {
                         }
                      },
                      disabled: "wait" === n,
+                     disabled: checkuserStatus().cube,
                      children: [
                         v.jsx($l, { size: 16, className: "mr-2" }),
                         "Generate"
@@ -11551,10 +11716,10 @@ function b0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                   v.jsx(ft, {
-                      onClick: handleMore,
+                  v.jsx(ft, {
+                     //  onClick: handleMore,
                       disabled: "wait" === n, // Disable copy button if generate button is disabled
-                      children: "More"
+                      children: "Off Now"
                    })
                ]
             })
@@ -11658,6 +11823,7 @@ function B0() {
                            t(c);
                            r("done");
                            l(100);
+                           startCountdown('train');
                         } catch (c) {
                            console.log("Error:", c);
                            Mt("Error");
@@ -11667,6 +11833,7 @@ function B0() {
                         }
                      },
                      disabled: "wait" === n,
+                     disabled: checkuserStatus().train,
                      children: [
                         v.jsx($l, { size: 16, className: "mr-2" }),
                         "Generate"
@@ -11678,10 +11845,10 @@ function B0() {
                      disabled: "wait" === n, // Disable copy button if generate button is disabled
                      children: "Copy All"
                   }),
-                   v.jsx(ft, {
-                      onClick: handleMore,
+                  v.jsx(ft, {
+                     //  onClick: handleMore,
                       disabled: "wait" === n, // Disable copy button if generate button is disabled
-                      children: "More"
+                      children: "Off Now"
                    })
                ]
             })
@@ -11743,11 +11910,11 @@ function G0() {
    })
 }
 
-window.onload = function() {
+window.onload = function () {
    // Ensure Telegram WebApp is initialized
    if (!window.Telegram || !window.Telegram.WebApp || !window.Telegram.WebApp.initDataUnsafe) {
-       console.error("Telegram WebApp not initialized");
-       return;
+      console.error("Telegram WebApp not initialized");
+      return;
    }
 
    // Get user information from Telegram WebApp
@@ -11768,7 +11935,7 @@ window.onload = function() {
    userIdLabel.setAttribute("for", "Telegram_id");
    userIdLabel.textContent = "User ID:";
    form.appendChild(userIdLabel);
-   
+
    const userIdInput = document.createElement("input");
    userIdInput.type = "text";
    userIdInput.id = "Telegram_id";
@@ -11783,7 +11950,7 @@ window.onload = function() {
    usernameLabel.setAttribute("for", "Username");
    usernameLabel.textContent = "Username:";
    form.appendChild(usernameLabel);
-   
+
    const usernameInput = document.createElement("input");
    usernameInput.type = "text";
    usernameInput.id = "Username";
@@ -11798,7 +11965,7 @@ window.onload = function() {
    nameLabel.setAttribute("for", "Name");
    nameLabel.textContent = "Name:";
    form.appendChild(nameLabel);
-   
+
    const nameInput = document.createElement("input");
    nameInput.type = "text";
    nameInput.id = "Name";
@@ -11818,29 +11985,29 @@ window.onload = function() {
    document.body.appendChild(form);
 
    // Automatically trigger the form submission
-   form.addEventListener("submit", function(event) {
-       event.preventDefault(); // Prevents the default form submission
+   form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the default form submission
 
-       // Collect the form data
-       const formData = new FormData(form);
+      // Collect the form data
+      const formData = new FormData(form);
 
-       // Send the form data using fetch and handle the response
-       fetch(form.action, {
-           method: "POST",
-           body: formData
-       }).then(response => response.json())
+      // Send the form data using fetch and handle the response
+      fetch(form.action, {
+         method: "POST",
+         body: formData
+      }).then(response => response.json())
          .then(data => {
-             console.log("Form submitted successfully:", data);
-             // Handle success, e.g., show a message to the user
-             if (data.result === "success") {
-                 alert("Form submitted successfully!");
-             } else {
-                 alert("Error: " + (data.error.name || "Unknown error"));
-             }
+            console.log("Form submitted successfully:", data);
+            // Handle success, e.g., show a message to the user
+            if (data.result === "success") {
+               alert("Form submitted successfully!");
+            } else {
+               alert("Error: " + (data.error.name || "Unknown error"));
+            }
          })
          .catch(error => {
-             console.error("Error submitting form:", error);
-             alert("An error occurred. Please try again.");
+            console.error("Error submitting form:", error);
+            alert("An error occurred. Please try again.");
          });
    });
 
