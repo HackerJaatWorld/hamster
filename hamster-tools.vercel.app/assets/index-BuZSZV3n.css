@@ -806,6 +806,11 @@ body {
     flex-direction: column;
     min-height: 100dvh
 }
+#root_more {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh
+}
 
 .container {
     flex: 1;
@@ -875,12 +880,3 @@ body {
 }
 
 
-#root > div > div > div.col-span-2.flex.items-center.gap-4.justify-center.mt-4{
-    position: fixed;
-    bottom: 10px;
-}
-
-#root > div > div > div > div > div.flex.flex-col.space-y-1\.5.p-6{
-    padding: 10px;
-    padding-left: 25px;
-}
