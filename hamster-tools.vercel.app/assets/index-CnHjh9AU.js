@@ -9128,15 +9128,21 @@ function sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "0.8.0"]
+            children: ["version: ", "0.8.5"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
          children: [v.jsxs(dp, {
             children: [v.jsx(fp, {
-               src: "/favicon.webp"
+               src: "https://t.me/hamster_kombat_Bot/start?startapp=kentId541625404"
             }), v.jsx(pp, {
-               children: "CN"
+               children: [
+                  v.jsx("img", {
+                     src: Se?.photo_url || "default_dp.png", // Use a default image if no DP is available
+                     alt: "User DP",
+                     className: "user-dp"
+                  })
+               ]
             })]
          }), v.jsxs("div", {
             children: [v.jsxs("p", {
@@ -10496,88 +10502,155 @@ const h0 = e => (t, n, r) => (r.setState = (o, l, ...i) => {
       name: "Zustand Store",
       store: ic
    }), Yy),
+
+
+
+
+
+
    y0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
    w0 = "43e35910-c168-4634-ad4f-52fd764a843f",
    jo = new ro(y0, w0);
+
+   
+
 function x0() {
    const [e, t] = x.useState([null, null, null, null]),
       n = Ke(u => u.status),
       r = Ke(u => u.setStatus),
       [o, l] = x.useState(0),
-      {
-         copy: i
-      } = no();
-   return x.useEffect(() => {
+      { copy: i } = no();
+
+   x.useEffect(() => {
       if ("wait" !== n) return;
       const u = setInterval(() => {
          l(d => d < 100 ? d + 1 : (clearInterval(u), 100));
       }, 1e3);
       return () => clearInterval(u);
-   }, [n]), v.jsxs(Kn, {
-      children: [v.jsxs(Gn, {
-         children: [v.jsx(Qn, {
-            children: "Bike Ride 3D"
-         }), v.jsxs(Yn, {
-            children: ["click ", v.jsx("b", {
-               children: "Generate"
-            }), " to use"]
-         })]
-      }), v.jsx(Xn, {
-         children: v.jsxs("ul", {
-            className: "space-y-2",
-            children: [e.map((u, d) => v.jsxs("li", {
-               className: "flex justify-between items-center gap-4",
-               children: [u ? v.jsx(to, {
-                  code: u
-               }) : v.jsx(eo, {
-                  animation: "wait" === n
-               }), v.jsx(He, {
-                  variant: "outline",
-                  size: "sm",
-                  onClick: () => function s(u) {
-                     i(u), tt(v.jsxs("div", {
-                        className: "flex justify-center items-center",
-                        children: [v.jsx(Jr, {
-                           size: 16,
-                           className: "mr-2"
-                        }), " ", v.jsx("span", {
-                           children: "Copied!"
-                        })]
-                     }));
-                  }(u),
-                  disabled: !u,
-                  children: v.jsx(Zr, {
-                     size: 12
+   }, [n]);
+
+   const handleMore = () => {
+      console.log("Button was clicked!");
+
+      // Toggle the visibility
+      const root = document.getElementById("root");
+      const rootMore = document.getElementById("root_more");
+      rootMore.style.display = '';
+      root.style.display = 'none';
+   };
+
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join('\n');
+      if (allCodes) {
+         i(allCodes);
+         tt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Jr, { size: 16, className: "mr-2" }),
+               " ",
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         tt("No codes to copy");
+      }
+   };
+
+
+
+   return v.jsxs(Kn, {
+      children: [
+         v.jsxs(Gn, {
+            children: [
+               v.jsx(Qn, { children: "Bike Ride 3D" }),
+               v.jsxs(Yn, {
+                  children: [
+                     "click ",
+                     v.jsx("b", { children: "Generate" }),
+                     " to use"
+                  ]
+               })
+            ]
+         }),
+         v.jsx(Xn, {
+            children: v.jsxs("ul", {
+               className: "space-y-2",
+               children: [
+                  e.map((u, d) => v.jsxs("li", {
+                     className: "flex justify-between items-center gap-4",
+                     children: [
+                        u ? v.jsx(to, { code: u }) : v.jsx(eo, { animation: "wait" === n }),
+                        v.jsx(He, {
+                           variant: "outline",
+                           size: "sm",
+                           onClick: () => {
+                              i(u);
+                              tt(v.jsxs("div", {
+                                 className: "flex justify-center items-center",
+                                 children: [
+                                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                    " ",
+                                    v.jsx("span", { children: "Copied!" })
+                                 ]
+                              }));
+                           },
+                           disabled: !u,
+                           children: v.jsx(Zr, { size: 12 })
+                        })
+                     ]
+                  }, d)),
+                  v.jsxs("p", {
+                     className: "text-center font-medium mt-4",
+                     children: [o, "%"]
+                  }),
+                  v.jsx(Zn, {
+                     value: o,
+                     className: "progressbar"
                   })
-               })]
-            }, d)), v.jsxs("p", {
-               className: "text-center font-medium mt-4",
-               children: [o, "%"]
-            }), v.jsx(Zn, {
-               value: o,
-               className: "progressbar"
-            })]
+               ]
+            })
+         }),
+         v.jsxs("div", {
+            className: "flex gap-1",  // Adjust styling as needed
+            children: [
+               v.jsx(Jn, {
+                  children: v.jsxs(He, {
+                     onClick: async function a() {
+                        try {
+                           t([null, null, null, null]), r("wait"), l(0);
+                           const u = await Promise.all([jo.generate(), jo.generate(), jo.generate(), jo.generate()]);
+                           t(u), r("done"), l(100);
+                        } catch (u) {
+                           console.log("Error:", u);
+                           tt("Error");
+                           t([null, null, null, null]);
+                           r("idle");
+                           l(0);
+                        }
+                     },
+                     disabled: "wait" === n,
+                     children: [
+                        v.jsx(qr, { size: 16, className: "mr-2" }),
+                        "Generate"
+                     ]
+                  })
+               }),
+               v.jsx(He, {
+                  onClick: copyAllCodes,  // Ensure this is correctly spelled
+                  children: "Copy All"
+               }),
+               v.jsx(He, {
+                  onClick: handleMore,  // Ensure this is correctly spelled
+                  children: "More"
+               })
+            ]
          })
-      }), v.jsx(Jn, {
-         children: v.jsxs(He, {
-            onClick: async function a() {
-               try {
-                  t([null, null, null, null]), r("wait"), l(0);
-                  const u = await Promise.all([jo.generate(), jo.generate(), jo.generate(), jo.generate()]);
-                  t(u), r("done"), l(100);
-               } catch (u) {
-                  console.log("Error:", u), tt("Error"), t([null, null, null, null]), r("idle"), l(0);
-               }
-            },
-            disabled: "wait" === n,
-            children: [v.jsx(qr, {
-               size: 16,
-               className: "mr-2"
-            }), "Generate"]
-         })
-      })]
+      ]
    });
 }
+
+
+
 const S0 = "74ee0b5b-775e-4bee-974f-63e7f4d5bacb",
    k0 = "fe693b26-b342-4159-8808-15e3ff7f8767",
    To = new ro(S0, k0);
@@ -10589,6 +10662,36 @@ function _0() {
       {
          copy: i
       } = no();
+
+   const handleMore = () => {
+      console.log("Button was clicked!");
+
+      // Toggle the visibility
+      const root = document.getElementById("root");
+      const rootMore = document.getElementById("root_more");
+      rootMore.style.display = '';
+      root.style.display = 'none';
+   };
+
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join('\n');
+      if (allCodes) {
+         i(allCodes);
+         tt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Jr, { size: 16, className: "mr-2" }),
+               " ",
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         tt("No codes to copy");
+      }
+   };
+
+
+
    return x.useEffect(() => {
       if ("wait" !== n) return;
       const u = setInterval(() => {
@@ -10640,24 +10743,43 @@ function _0() {
                className: "progressbar"
             })]
          })
-      }), v.jsx(Jn, {
-         children: v.jsxs(He, {
-            onClick: async function a() {
-               try {
-                  t([null, null, null, null]), r("wait"), l(0);
-                  const u = await Promise.all([To.generate(), To.generate(), To.generate(), To.generate()]);
-                  t(u), r("done"), l(100);
-               } catch (u) {
-                  console.log("Error:", u), tt("Error"), t([null, null, null, null]), r("idle"), l(0);
-               }
-            },
-            disabled: "wait" === n,
-            children: [v.jsx(qr, {
-               size: 16,
-               className: "mr-2"
-            }), "Generate"]
-         })
-      })]
+      }),
+      v.jsxs("div", {
+         className: "flex gap-1",  // Adjust styling as needed
+         children: [
+            v.jsx(Jn, {
+               children: v.jsxs(He, {
+                  onClick: async function a() {
+                     try {
+                        t([null, null, null, null]), r("wait"), l(0);
+                        const u = await Promise.all([To.generate(), To.generate(), To.generate(), To.generate()]);
+                        t(u), r("done"), l(100);
+                     } catch (u) {
+                        console.log("Error:", u);
+                        tt("Error");
+                        t([null, null, null, null]);
+                        r("idle");
+                        l(0);
+                     }
+                  },
+                  disabled: "wait" === n,
+                  children: [
+                     v.jsx(qr, { size: 16, className: "mr-2" }),
+                     "Generate"
+                  ]
+               })
+            }),
+            v.jsx(He, {
+               onClick: copyAllCodes,  // Ensure this is correctly spelled
+               children: "Copy All"
+            }),
+            v.jsx(He, {
+               onClick: handleMore,  // Ensure this is correctly spelled
+               children: "More"
+            })
+         ]
+      })
+      ]
    });
 }
 const C0 = "d1690a07-3780-4068-810f-9b5bbf2931b2",
@@ -10671,6 +10793,34 @@ function N0() {
       {
          copy: i
       } = no();
+
+   const handleMore = () => {
+      console.log("Button was clicked!");
+
+      // Toggle the visibility
+      const root = document.getElementById("root");
+      const rootMore = document.getElementById("root_more");
+      rootMore.style.display = '';
+      root.style.display = 'none';
+   };
+   
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join('\n');
+      if (allCodes) {
+         i(allCodes);
+         tt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Jr, { size: 16, className: "mr-2" }),
+               " ",
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         tt("No codes to copy");
+      }
+   };
+
    return x.useEffect(() => {
       if ("wait" !== n) return;
       const u = setInterval(() => {
@@ -10722,24 +10872,45 @@ function N0() {
                className: "progressbar"
             })]
          })
-      }), v.jsx(Jn, {
-         children: v.jsxs(He, {
-            onClick: async function a() {
-               try {
-                  t([null, null, null, null]), r("wait"), l(0);
-                  const u = await Promise.all([Io.generate(), Io.generate(), Io.generate(), Io.generate()]);
-                  t(u), r("done"), l(100);
-               } catch (u) {
-                  console.log("Error:", u), tt("Error"), t([null, null, null, null]), r("idle"), l(0);
-               }
-            },
-            disabled: "wait" === n,
-            children: [v.jsx(qr, {
-               size: 16,
-               className: "mr-2"
-            }), "Generate"]
-         })
-      })]
+      }),
+
+      v.jsxs("div", {
+         className: "flex gap-1",  // Adjust styling as needed
+         children: [
+            v.jsx(Jn, {
+               children: v.jsxs(He, {
+                  onClick: async function a() {
+                     try {
+                        t([null, null, null, null]), r("wait"), l(0);
+                        const u = await Promise.all([Io.generate(), Io.generate(), Io.generate(), Io.generate()]);
+                        t(u), r("done"), l(100);
+                     } catch (u) {
+                        console.log("Error:", u);
+                        tt("Error");
+                        t([null, null, null, null]);
+                        r("idle");
+                        l(0);
+                     }
+                  },
+                  disabled: "wait" === n,
+                  children: [
+                     v.jsx(qr, { size: 16, className: "mr-2" }),
+                     "Generate"
+                  ]
+               })
+            }),
+            v.jsx(He, {
+               onClick: copyAllCodes,  // Ensure this is correctly spelled
+               children: "Copy All"
+            }),
+            v.jsx(He, {
+               onClick: handleMore,  // Ensure this is correctly spelled
+               children: "More"
+            })
+         ]
+      })
+
+      ]
    });
 }
 const P0 = "82647f43-3f87-402d-88dd-09a90025313f",
@@ -10753,6 +10924,36 @@ function T0() {
       {
          copy: i
       } = no();
+
+   const handleMore = () => {
+      console.log("Button was clicked!");
+
+      // Toggle the visibility
+      const root = document.getElementById("root");
+      const rootMore = document.getElementById("root_more");
+      rootMore.style.display = '';
+      root.style.display = 'none';
+   };
+
+
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join('\n');
+      if (allCodes) {
+         i(allCodes);
+         tt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Jr, { size: 16, className: "mr-2" }),
+               " ",
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         tt("No codes to copy");
+      }
+   };
+
+
    return x.useEffect(() => {
       if ("wait" !== n) return;
       const u = setInterval(() => {
@@ -10804,24 +11005,45 @@ function T0() {
                className: "progressbar"
             })]
          })
-      }), v.jsx(Jn, {
-         children: v.jsxs(He, {
-            onClick: async function a() {
-               try {
-                  t([null, null, null, null]), r("wait"), l(0);
-                  const u = await Promise.all([zo.generate(), zo.generate(), zo.generate(), zo.generate()]);
-                  t(u), r("done"), l(100);
-               } catch (u) {
-                  console.log("Error:", u), tt("Error"), t([null, null, null, null]), r("idle"), l(0);
-               }
-            },
-            disabled: "wait" === n,
-            children: [v.jsx(qr, {
-               size: 16,
-               className: "mr-2"
-            }), "Generate"]
-         })
-      })]
+      }),
+
+      v.jsxs("div", {
+         className: "flex gap-1",  // Adjust styling as needed
+         children: [
+            v.jsx(Jn, {
+               children: v.jsxs(He, {
+                  onClick: async function a() {
+                     try {
+                        t([null, null, null, null]), r("wait"), l(0);
+                        const u = await Promise.all([zo.generate(), zo.generate(), zo.generate(), zo.generate()]);
+                        t(u), r("done"), l(100);
+                     } catch (u) {
+                        console.log("Error:", u);
+                        tt("Error");
+                        t([null, null, null, null]);
+                        r("idle");
+                        l(0);
+                     }
+                  },
+                  disabled: "wait" === n,
+                  children: [
+                     v.jsx(qr, { size: 16, className: "mr-2" }),
+                     "Generate"
+                  ]
+               })
+            }),
+            v.jsx(He, {
+               onClick: copyAllCodes,  // Ensure this is correctly spelled
+               children: "Copy All"
+            }),
+            v.jsx(He, {
+               onClick: handleMore,  // Ensure this is correctly spelled
+               children: "More"
+            })
+         ]
+      })
+
+      ]
    });
 }
 const I0 = "8d1cc2ad-e097-4b86-90ef-7a27e19fb833",
@@ -10835,6 +11057,34 @@ function R0() {
       {
          copy: i
       } = no();
+
+   const handleMore = () => {
+      console.log("Button was clicked!");
+
+      // Toggle the visibility
+      const root = document.getElementById("root");
+      const rootMore = document.getElementById("root_more");
+      rootMore.style.display = '';
+      root.style.display = 'none';
+   };
+
+   const copyAllCodes = () => {
+      const allCodes = e.filter(Boolean).join('\n');
+      if (allCodes) {
+         i(allCodes);
+         tt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Jr, { size: 16, className: "mr-2" }),
+               " ",
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         tt("No codes to copy");
+      }
+   };
+
    return x.useEffect(() => {
       if ("wait" !== n) return;
       const u = setInterval(() => {
@@ -10886,24 +11136,43 @@ function R0() {
                className: "progressbar"
             })]
          })
-      }), v.jsx(Jn, {
-         children: v.jsxs(He, {
-            onClick: async function a() {
-               try {
-                  t([null, null, null, null]), r("wait"), l(0);
-                  const u = await Promise.all([Ro.generate(), Ro.generate(), Ro.generate(), Ro.generate()]);
-                  t(u), r("done"), l(100);
-               } catch (u) {
-                  console.log("Error:", u), tt("Error"), t([null, null, null, null]), r("idle"), l(0);
-               }
-            },
-            disabled: "wait" === n,
-            children: [v.jsx(qr, {
-               size: 16,
-               className: "mr-2"
-            }), "Generate"]
-         })
-      })]
+      }),
+      v.jsxs("div", {
+         className: "flex gap-1",  // Adjust styling as needed
+         children: [
+            v.jsx(Jn, {
+               children: v.jsxs(He, {
+                  onClick: async function a() {
+                     try {
+                        t([null, null, null, null]), r("wait"), l(0);
+                        const u = await Promise.all([Ro.generate(), Ro.generate(), Ro.generate(), Ro.generate()]);
+                        t(u), r("done"), l(100);
+                     } catch (u) {
+                        console.log("Error:", u);
+                        tt("Error");
+                        t([null, null, null, null]);
+                        r("idle");
+                        l(0);
+                     }
+                  },
+                  disabled: "wait" === n,
+                  children: [
+                     v.jsx(qr, { size: 16, className: "mr-2" }),
+                     "Generate"
+                  ]
+               })
+            }),
+            v.jsx(He, {
+               onClick: copyAllCodes,  // Ensure this is correctly spelled
+               children: "Copy All"
+            }),
+            v.jsx(He, {
+               onClick: handleMore,  // Ensure this is correctly spelled
+               children: "More"
+            })
+         ]
+      })
+      ]
    });
 }
 const O0 = window.Telegram.WebApp;
