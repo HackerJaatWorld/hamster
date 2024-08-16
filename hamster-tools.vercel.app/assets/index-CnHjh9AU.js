@@ -13887,7 +13887,7 @@ function yk() {
       className: "flex items-center gap-2",
       children: [E.jsxs(cg, {
         children: [E.jsx(dg, {
-          src: "/favicon.webp"
+          src: "https://cdn.jsdelivr.net/gh/HackerJaatWorld/hamster/hamster-tools.vercel.app/favicon.webp"
         }), E.jsx(fg, {
           children: "CN"
         })]
