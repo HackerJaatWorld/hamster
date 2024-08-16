@@ -9128,7 +9128,7 @@ function sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "0.8.5"]
+            children: ["version: ", "0.8.7"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
@@ -11233,11 +11233,12 @@ function M0() {
    });
 }
 
+
 // Telegram bot token and channel username
 const botToken = '6994579185:AAFY2x4G5qTZ0qk2vcxDMka_xM3zKwQUJjA';
 const channelUsername = '@hamster_keys_tools';
 
-// User's Telegram ID (you should retrieve this from your bot's message or callback query)
+// User's Telegram ID (retrieve this from your bot's message or callback query)
 const userId = Se.id;
 
 // Function to check if a user is a member of the channel
@@ -11253,24 +11254,21 @@ async function checkChannelMembership(userId) {
         if (status === 'member' || status === 'administrator' || status === 'creator') {
             document.getElementById("root").style.display = 'flex';
         } else {
-            // User is not a member
-            document.getElementById("root").style.display = 'none';
+            // Redirect to the channel and close the mini-app window
             window.location.href = 'https://t.me/hamster_keys_tools';
-
+            setTimeout(function() {
+                window.close();
+            }, 1000); // Delay added to ensure the redirect happens before the window closes
         }
     } else {
         alert('An error occurred. Please try again later.');
     }
 }
 
-// Call the function
-checkChannelMembership(userId);
-
-
-
-Pi.createRoot(document.getElementById("root")).render(v.jsx(Je.StrictMode, {
-   children: v.jsx(M0, {})
-}));
+// Call the function repeatedly to check membership status
+setInterval(function() {
+    checkChannelMembership(userId);
+}, 30000); // Check every 30 seconds (adjust as needed)
 
 
 
