@@ -11320,7 +11320,7 @@ function T1() {
             t1(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
             r1("wait");
             l1(0);
-            const codes = await Promise.all(Array.from({ length: numberOfCodes }, () => zo.generate()));
+            const codes = await Promise.all(Array.from({ length: numberOfCodes }, () => zo1.generate()));
             t1(codes);
             r1("done");
             l1(100);
