@@ -9128,7 +9128,7 @@ function sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "0.9.5"]
+            children: ["version: ", "1.0.0"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
@@ -9137,11 +9137,7 @@ function sy() {
                src: "https://t.me/hamster_kombat_Bot/start?startapp=kentId541625404"
             }), v.jsx(pp, {
                children: [
-                  v.jsx("img", {
-                     src: Se?.photo_url || "default_dp.png", // Use a default image if no DP is available
-                     alt: "User DP",
-                     className: "user-dp"
-                  })
+                  localStorage.getItem("generatedCodeCount")
                ]
             })]
          }), v.jsxs("div", {
@@ -10620,6 +10616,10 @@ function x0() {
                            t([null, null, null, null]), r("wait"), l(0);
                            const u = await Promise.all([jo.generate(), jo.generate(), jo.generate(), jo.generate()]);
                            t(u), r("done"), l(100);
+                           const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                           const newCount = generatedCodeCount + 4;
+                           localStorage.setItem('generatedCodeCount', newCount);
+
                         } catch (u) {
                            console.log("Error:", u);
                            tt("Error");
@@ -10754,6 +10754,10 @@ function _0() {
                         t([null, null, null, null]), r("wait"), l(0);
                         const u = await Promise.all([To.generate(), To.generate(), To.generate(), To.generate()]);
                         t(u), r("done"), l(100);
+                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                        const newCount = generatedCodeCount + 4;
+                        localStorage.setItem('generatedCodeCount', newCount);
+
                      } catch (u) {
                         console.log("Error:", u);
                         tt("Error");
@@ -10884,6 +10888,10 @@ function N0() {
                         t([null, null, null, null]), r("wait"), l(0);
                         const u = await Promise.all([Io.generate(), Io.generate(), Io.generate(), Io.generate()]);
                         t(u), r("done"), l(100);
+                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                        const newCount = generatedCodeCount + 4;
+                        localStorage.setItem('generatedCodeCount', newCount);
+
                      } catch (u) {
                         console.log("Error:", u);
                         tt("Error");
@@ -11017,6 +11025,10 @@ function T0() {
                         t([null, null, null, null]), r("wait"), l(0);
                         const u = await Promise.all([zo.generate(), zo.generate(), zo.generate(), zo.generate()]);
                         t(u), r("done"), l(100);
+                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                        const newCount = generatedCodeCount + 4;
+                        localStorage.setItem('generatedCodeCount', newCount);
+
                      } catch (u) {
                         console.log("Error:", u);
                         tt("Error");
@@ -11147,6 +11159,10 @@ function R0() {
                         t([null, null, null, null]), r("wait"), l(0);
                         const u = await Promise.all([Ro.generate(), Ro.generate(), Ro.generate(), Ro.generate()]);
                         t(u), r("done"), l(100);
+                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                        const newCount = generatedCodeCount + 4;
+                        localStorage.setItem('generatedCodeCount', newCount);
+
                      } catch (u) {
                         console.log("Error:", u);
                         tt("Error");
@@ -11199,7 +11215,7 @@ function T1() {
    };
 
    const copyAllCodes = () => {
-      const allCodes = e.filter(Boolean).join('\n');
+      const allCodes = e1.filter(Boolean).join('\n');
       if (allCodes) {
          i(allCodes);
          tt(v.jsxs("div", {
@@ -11278,6 +11294,10 @@ function T1() {
                         t1([null, null, null, null]), r1("wait"), l1(0);
                         const u1 = await Promise.all([zo1.generate(), zo1.generate(), zo1.generate(), zo1.generate()]);
                         t1(u1), r1("done"), l1(100);
+                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                        const newCount = generatedCodeCount + 4;
+                        localStorage.setItem('generatedCodeCount', newCount);
+
                      } catch (u1) {
                         console.log("Error:", u1);
                         tt("Error");
@@ -11377,37 +11397,10 @@ function M0() {
    });
 }
 
- // Telegram bot token and channel username
- const botToken = '6994579185:AAFY2x4G5qTZ0qk2vcxDMka_xM3zKwQUJjA';
- const channelUsername = '@hamster_keys_tools';
- // User's Telegram ID (retrieve this from your bot's message or callback query)
- const userId = Se.id;
- // Function to check if a user is a member of the channel
- async function checkChannelMembership(userId) {
-     const url = `https://api.telegram.org/bot${botToken}/getChatMember?chat_id=${channelUsername}&user_id=${userId}`;
-  
-     const response = await fetch(url);
-     const data = await response.json();
-     if (data.ok) {
-         const status = data.result.status;
-         // Check if the user is a member
-         if (status === 'member' || status === 'administrator' || status === 'creator') {
-             document.getElementById("root").style.display = 'flex';
-         } else {
-             // Redirect to the channel and close the mini-app window
-             window.location.href = 'https://t.me/hamster_keys_tools';
-             setTimeout(function() {
-                 window.close();
-             }, 1000); // Delay added to ensure the redirect happens before the window closes
-         }
-     } else {
-         alert('An error occurred. Please try again later.');
-     }
- }
- // Call the function repeatedly to check membership status
- setInterval(function() {
-     checkChannelMembership(userId);
- }, 30000); // Check every 30 seconds (adjust as needed)
+
+
+const userId = 1757051;
+localStorage.setItem('userId', userId);
 
 Pi.createRoot(document.getElementById("root")).render(v.jsx(Je.StrictMode, {
    children: v.jsx(M0, {})
@@ -11423,3 +11416,5 @@ Pi.createRoot(document.getElementById("root")).render(v.jsx(Je.StrictMode, {
    } catch (e) { }
    ;
 })({}, document, location);
+
+
