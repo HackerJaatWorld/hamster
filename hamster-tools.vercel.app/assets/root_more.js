@@ -9128,7 +9128,7 @@ function sy() {
                     className: "tg-logo play"
                 })
             }), v.jsxs("p", {
-                children: ["version: ", "0.9.5"]
+                children: ["version: ", "1.0.0"]
             })]
         }), v.jsxs("div", {
             className: "flex items-center gap-2",
@@ -9137,12 +9137,9 @@ function sy() {
                     src: "https://t.me/hamster_kombat_Bot/start?startapp=kentId541625404"
                 }), v.jsx(pp, {
                     children: [
-                        v.jsx("img", {
-                            src: Se?.photo_url || "default_dp.png", // Use a default image if no DP is available
-                            alt: "User DP",
-                            className: "user-dp"
-                        })
+                        localStorage.getItem("generatedCodeCount")
                     ]
+
                 })]
             }), v.jsxs("div", {
                 children: [v.jsxs("p", {
@@ -10513,24 +10510,24 @@ const h0 = e => (t, n, r) => (r.setState = (o, l, ...i) => {
     jo = new ro(y0, w0);
 
 function x0() {
-    const [e, t] = x.useState([null, null, null, null]),
-        n = Ke(u => u.status),
-        r = Ke(u => u.setStatus),
-        [o, l] = x.useState(0),
-        { copy: i } = no();
+    const [codes, setCodes] = x.useState([null, null, null, null]),
+        status = Ke(u => u.status),
+        setStatus = Ke(u => u.setStatus),
+        [progress, setProgress] = x.useState(0),
+        { copy } = no();
+
+    // Retrieve the count of generated codes from localStorage (or initialize it to 0)
 
     x.useEffect(() => {
-        if ("wait" !== n) return;
-        const u = setInterval(() => {
-            l(d => d < 100 ? d + 1 : (clearInterval(u), 100));
-        }, 1e3);
-        return () => clearInterval(u);
-    }, [n]);
+        if ("wait" !== status) return;
+        const interval = setInterval(() => {
+            setProgress(d => d < 100 ? d + 1 : (clearInterval(interval), 100));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [status]);
 
     const handleClose = () => {
         console.log("Button was clicked!");
-
-        // Toggle the visibility
         const root = document.getElementById("root");
         const rootMore = document.getElementById("root_more");
         rootMore.style.display = 'none';
@@ -10538,9 +10535,9 @@ function x0() {
     };
 
     const copyAllCodes = () => {
-        const allCodes = e.filter(Boolean).join('\n');
+        const allCodes = codes.filter(Boolean).join('\n');
         if (allCodes) {
-            i(allCodes);
+            copy(allCodes);
             tt(v.jsxs("div", {
                 className: "flex justify-center items-center",
                 children: [
@@ -10555,26 +10552,33 @@ function x0() {
     };
 
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
-        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
-            tt("Please enter a valid number between 1 and 20.");
+        const numberOfCodes = parseInt(document.getElementById("bike_num_of_code").value, 10);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
             return;
         }
 
         try {
-            t(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
-            r("wait");
-            l(0);
-            const codes = await Promise.all(Array.from({ length: numberOfCodes }, () => jo.generate()));
-            t(codes);
-            r("done");
-            l(100);
+            setCodes(Array(numberOfCodes).fill(null));
+            setStatus("wait");
+            setProgress(0);
+            const newCodes = await Promise.all(Array.from({ length: numberOfCodes }, () => jo.generate()));
+            setCodes(newCodes);
+            setStatus("done");
+            setProgress(100);
+
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
         } catch (error) {
             console.log("Error:", error);
             tt("Error generating codes");
-            t(Array(numberOfCodes).fill(null));
-            r("idle");
-            l(0);
+            setCodes(Array(numberOfCodes).fill(null));
+            setStatus("idle");
+            setProgress(0);
         }
     };
 
@@ -10583,12 +10587,10 @@ function x0() {
             v.jsxs(Gn, {
                 children: [
                     v.jsx(Qn, { children: "Bike Ride 3D" }),
-                    v.jsxs(Yn, {
-                        children: [
-                            "click ",
-                            v.jsx("b", { children: "Generate" }),
-                            " to use"
-                        ]
+                    v.jsxs("input", {
+                        id: 'bike_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
                     })
                 ]
             }),
@@ -10596,15 +10598,15 @@ function x0() {
                 children: v.jsxs("ul", {
                     className: "space-y-2",
                     children: [
-                        e.map((u, d) => v.jsxs("li", {
+                        codes.map((u, d) => v.jsxs("li", {
                             className: "flex justify-between items-center gap-4",
                             children: [
-                                u ? v.jsx(to, { code: u }) : v.jsx(eo, { animation: "wait" === n }),
+                                u ? v.jsx(to, { code: u }) : v.jsx(eo, { animation: "wait" === status }),
                                 v.jsx(He, {
                                     variant: "outline",
                                     size: "sm",
                                     onClick: () => {
-                                        i(u);
+                                        copy(u);
                                         tt(v.jsxs("div", {
                                             className: "flex justify-center items-center",
                                             children: [
@@ -10621,22 +10623,22 @@ function x0() {
                         }, d)),
                         v.jsxs("p", {
                             className: "text-center font-medium mt-4",
-                            children: [o, "%"]
+                            children: [progress, "%"]
                         }),
                         v.jsx(Zn, {
-                            value: o,
+                            value: progress,
                             className: "progressbar"
                         })
                     ]
                 })
             }),
             v.jsxs("div", {
-                className: "flex gap-1",  // Adjust styling as needed
+                className: "flex gap-1",
                 children: [
                     v.jsx(Jn, {
                         children: v.jsxs(He, {
-                            onClick: handleGenerate,  // Use the handleGenerate function here
-                            disabled: "wait" === n,
+                            onClick: handleGenerate,
+                            disabled: "wait" === status,
                             children: [
                                 v.jsx(qr, { size: 16, className: "mr-2" }),
                                 "Generate"
@@ -10656,6 +10658,7 @@ function x0() {
         ]
     });
 }
+
 
 
 
@@ -10708,9 +10711,12 @@ function _0() {
     }, [n]);
 
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
-        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
-            tt("Please enter a valid number between 1 and 20.");
+        const numberOfCodes = parseInt(document.getElementById("clone_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
             return;
         }
 
@@ -10722,6 +10728,10 @@ function _0() {
             t(codes);
             r("done");
             l(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
         } catch (u) {
             console.log("Error:", u);
             tt("Error generating codes");
@@ -10736,12 +10746,10 @@ function _0() {
             v.jsxs(Gn, {
                 children: [
                     v.jsx(Qn, { children: "My Clone Army" }),
-                    v.jsxs(Yn, {
-                        children: [
-                            "click ",
-                            v.jsx("b", { children: "Generate" }),
-                            " to use"
-                        ]
+                    v.jsxs("input", {
+                        id: 'clone_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
                     })
                 ]
             }),
@@ -10826,8 +10834,6 @@ function N0() {
 
     const handleClose = () => {
         console.log("Button was clicked!");
-
-        // Toggle the visibility
         const root = document.getElementById("root");
         const rootMore = document.getElementById("root_more");
         rootMore.style.display = 'none';
@@ -10851,10 +10857,21 @@ function N0() {
         }
     };
 
+    x.useEffect(() => {
+        if ("wait" !== n) return;
+        const interval = setInterval(() => {
+            l(d => d < 100 ? d + 1 : (clearInterval(interval), 100));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [n]);
+
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
-        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
-            tt("Please enter a valid number between 1 and 20.");
+        const numberOfCodes = parseInt(document.getElementById("cube_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
             return;
         }
 
@@ -10866,8 +10883,12 @@ function N0() {
             t(codes);
             r("done");
             l(100);
-        } catch (u) {
-            console.log("Error:", u);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
+        } catch (error) {
+            console.log("Error:", error);
             tt("Error generating codes");
             t(Array(numberOfCodes).fill(null));
             r("idle");
@@ -10880,12 +10901,10 @@ function N0() {
             v.jsxs(Gn, {
                 children: [
                     v.jsx(Qn, { children: "Chain Cube 2048" }),
-                    v.jsxs(Yn, {
-                        children: [
-                            "click ",
-                            v.jsx("b", { children: "Generate" }),
-                            " to use"
-                        ]
+                    v.jsxs("input", {
+                        id: 'cube_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
                     })
                 ]
             }),
@@ -10932,7 +10951,7 @@ function N0() {
                 children: [
                     v.jsx(Jn, {
                         children: v.jsxs(He, {
-                            onClick: handleGenerate, // Using handleGenerate for dynamic code generation
+                            onClick: handleGenerate,
                             disabled: "wait" === n,
                             children: [
                                 v.jsx(qr, { size: 16, className: "mr-2" }),
@@ -10953,6 +10972,7 @@ function N0() {
         ]
     });
 }
+
 
 
 const P0 = "82647f43-3f87-402d-88dd-09a90025313f",
@@ -10992,9 +11012,12 @@ function T0() {
     };
 
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
-        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
-            tt("Please enter a valid number between 1 and 20.");
+        const numberOfCodes = parseInt(document.getElementById("train_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
             return;
         }
 
@@ -11006,6 +11029,10 @@ function T0() {
             t(codes);
             r("done");
             l(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
         } catch (u) {
             console.log("Error:", u);
             tt("Error generating codes");
@@ -11028,8 +11055,10 @@ function T0() {
             v.jsxs(Gn, {
                 children: [
                     v.jsx(Qn, { children: "Train Miner" }),
-                    v.jsxs(Yn, {
-                        children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
+                    v.jsxs("input", {
+                        id: 'train_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
                     })
                 ]
             }),
@@ -11131,9 +11160,12 @@ function R0() {
     };
 
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
-        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
-            tt("Please enter a valid number between 1 and 20.");
+        const numberOfCodes = parseInt(document.getElementById("merge_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
             return;
         }
 
@@ -11145,6 +11177,10 @@ function R0() {
             t(codes);
             r("done");
             l(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
         } catch (u) {
             console.log("Error:", u);
             tt("Error generating codes");
@@ -11167,8 +11203,10 @@ function R0() {
             v.jsxs(Gn, {
                 children: [
                     v.jsx(Qn, { children: "Merge Away" }),
-                    v.jsxs(Yn, {
-                        children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
+                    v.jsxs("input", {
+                        id: 'merge_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
                     })
                 ]
             }),
@@ -11231,23 +11269,24 @@ function R0() {
 }
 
 const P1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New P1 ID
-   j1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New j1 ID
-   zo1 = new ro(P1, j1);  // New instance of ro with the new IDs
+    j1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New j1 ID
+    zo1 = new ro(P1, j1);  // New instance of ro with the new IDs
 
-   function T1() {
+function T1() {
     const [e1, t1] = x.useState([null, null, null, null]);
     const n1 = Ke(u => u.status);
     const r1 = Ke(u => u.setStatus);
     const [o1, l1] = x.useState(0);
     const { copy: i1 } = no();
 
-    const handleMore = () => {
+    const handleClose = () => {
         console.log("Button was clicked!");
+
         // Toggle the visibility
         const root = document.getElementById("root");
         const rootMore = document.getElementById("root_more");
-        rootMore.style.display = '';
-        root.style.display = 'none';
+        rootMore.style.display = 'none';
+        root.style.display = 'flex';
     };
 
     const copyAllCodes = () => {
@@ -11268,9 +11307,12 @@ const P1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New P1 ID
     };
 
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
-        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
-            tt("Please enter a valid number between 1 and 20.");
+        const numberOfCodes = parseInt(document.getElementById("twerk_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
             return;
         }
 
@@ -11282,6 +11324,10 @@ const P1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New P1 ID
             t1(codes);
             r1("done");
             l1(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
         } catch (u) {
             console.log("Error:", u);
             tt("Error generating codes");
@@ -11304,8 +11350,10 @@ const P1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New P1 ID
             v.jsxs(Gn, {
                 children: [
                     v.jsx(Qn, { children: "Twerk" }),
-                    v.jsxs(Yn, {
-                        children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
+                    v.jsxs("input", {
+                        id: 'twerk_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
                     })
                 ]
             }),
@@ -11360,7 +11408,7 @@ const P1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New P1 ID
                         })
                     }),
                     v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
-                    v.jsx(He, { onClick: handleMore, children: "More" })
+                    v.jsx(He, { onClick: handleClose, children: "Close" })
                 ]
             })
         ]
