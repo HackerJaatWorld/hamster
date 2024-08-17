@@ -9128,7 +9128,7 @@ function sy() {
                     className: "tg-logo play"
                 })
             }), v.jsxs("p", {
-                children: ["version: ", "0.8.5"]
+                children: ["version: ", "0.9.5"]
             })]
         }), v.jsxs("div", {
             className: "flex items-center gap-2",
@@ -11230,6 +11230,143 @@ function R0() {
     });
 }
 
+const P1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New P1 ID
+   j1 = "61308365-9d16-4040-8bb0-2f4a4c69074c",  // New j1 ID
+   zo1 = new ro(P1, j1);  // New instance of ro with the new IDs
+
+   function T1() {
+    const [e1, t1] = x.useState([null, null, null, null]);
+    const n1 = Ke(u => u.status);
+    const r1 = Ke(u => u.setStatus);
+    const [o1, l1] = x.useState(0);
+    const { copy: i1 } = no();
+
+    const handleMore = () => {
+        console.log("Button was clicked!");
+        // Toggle the visibility
+        const root = document.getElementById("root");
+        const rootMore = document.getElementById("root_more");
+        rootMore.style.display = '';
+        root.style.display = 'none';
+    };
+
+    const copyAllCodes = () => {
+        const allCodes = e1.filter(Boolean).join('\n');
+        if (allCodes) {
+            i1(allCodes);
+            tt(v.jsxs("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                    " ",
+                    v.jsx("span", { children: "All Codes Copied!" })
+                ]
+            }));
+        } else {
+            tt("No codes to copy");
+        }
+    };
+
+    const handleGenerate = async () => {
+        const numberOfCodes = parseInt(prompt("Enter the number of codes to generate (1-20):"), 10);
+        if (isNaN(numberOfCodes) || numberOfCodes < 1 || numberOfCodes > 20) {
+            tt("Please enter a valid number between 1 and 20.");
+            return;
+        }
+
+        try {
+            t1(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
+            r1("wait");
+            l1(0);
+            const codes = await Promise.all(Array.from({ length: numberOfCodes }, () => zo.generate()));
+            t1(codes);
+            r1("done");
+            l1(100);
+        } catch (u) {
+            console.log("Error:", u);
+            tt("Error generating codes");
+            t1(Array(numberOfCodes).fill(null));
+            r1("idle");
+            l1(0);
+        }
+    };
+
+    x.useEffect(() => {
+        if ("wait" !== n1) return;
+        const u1 = setInterval(() => {
+            l1(d1 => d1 < 100 ? d1 + 1 : (clearInterval(u1), 100));
+        }, 1e3);
+        return () => clearInterval(u1);
+    }, [n1]);
+
+    return v.jsxs(Kn, {
+        children: [
+            v.jsxs(Gn, {
+                children: [
+                    v.jsx(Qn, { children: "Twerk" }),
+                    v.jsxs(Yn, {
+                        children: ["click ", v.jsx("b", { children: "Generate" }), " to use"]
+                    })
+                ]
+            }),
+            v.jsx(Xn, {
+                children: v.jsxs("ul", {
+                    className: "space-y-2",
+                    children: [
+                        e1.map((u1, d1) =>
+                            v.jsxs("li", {
+                                className: "flex justify-between items-center gap-4",
+                                children: [
+                                    u1 ? v.jsx(to, { code: u1 }) : v.jsx(eo, { animation: "wait" === n1 }),
+                                    v.jsx(He, {
+                                        variant: "outline",
+                                        size: "sm",
+                                        onClick: () =>
+                                            function s1(u1) {
+                                                i1(u1);
+                                                tt(
+                                                    v.jsxs("div", {
+                                                        className: "flex justify-center items-center",
+                                                        children: [
+                                                            v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                                            " ",
+                                                            v.jsx("span", { children: "Copied!" })
+                                                        ]
+                                                    })
+                                                );
+                                            }(u1),
+                                        disabled: !u1,
+                                        children: v.jsx(Zr, { size: 12 })
+                                    })
+                                ]
+                            }, d1)
+                        ),
+                        v.jsxs("p", { className: "text-center font-medium mt-4", children: [o1, "%"] }),
+                        v.jsx(Zn, { value: o1, className: "progressbar" })
+                    ]
+                })
+            }),
+            v.jsxs("div", {
+                className: "flex gap-1",
+                children: [
+                    v.jsx(Jn, {
+                        children: v.jsxs(He, {
+                            onClick: handleGenerate, // Use handleGenerate here
+                            disabled: "wait" === n1,
+                            children: [
+                                v.jsx(qr, { size: 16, className: "mr-2" }),
+                                "Generate"
+                            ]
+                        })
+                    }),
+                    v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
+                    v.jsx(He, { onClick: handleMore, children: "More" })
+                ]
+            })
+        ]
+    });
+}
+
 
 
 const O0 = window.Telegram.WebApp;
@@ -11268,6 +11405,11 @@ function M0() {
                         className: "font-bold text-foreground-muted",
                         disabled: "wait" === e,
                         children: "Merge"
+                    }), v.jsx(fn, {
+                        value: "twerk",
+                        className: "font-bold text-foreground-muted",
+                        disabled: "wait" === e,
+                        children: "Twerk"
                     })]
                 }), v.jsx(pn, {
                     value: "bike",
@@ -11284,6 +11426,9 @@ function M0() {
                 }), v.jsx(pn, {
                     value: "merge",
                     children: v.jsx(R0, {})
+                }), v.jsx(pn, {
+                    value: "twerk",
+                    children: v.jsx(T1, {})
                 })]
             }), v.jsx(Gv, {})]
         })]
