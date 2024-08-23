@@ -11643,7 +11643,7 @@ function mud() {
                 children: [
                     v.jsx(Qn, { children: "Mow and Trim" }),
                     v.jsxs("input", {
-                        id: 'mow_num_of_code',
+                        id: 'mud_num_of_code',
                         className: 'number_of_code',
                         placeholder: 'Enter the number of codes (1-30)'
                     })
@@ -11898,15 +11898,15 @@ function M0() {
                         disabled: "wait" === e,
                         children: "Poly"
                     }), v.jsx(fn, {
-                        value: "mow",
+                        value: "trim",
                         className: "font-bold text-foreground-muted",
                         disabled: "wait" === e,
-                        children: "Mow"
+                        children: "Trim"
                     }), v.jsx(fn, {
-                        value: "mud",
+                        value: "race",
                         className: "font-bold text-foreground-muted",
                         disabled: "wait" === e,
-                        children: "Mud"
+                        children: "Race"
                     })]
                 }), v.jsx(pn, {
                     value: "bike",
@@ -11930,11 +11930,11 @@ function M0() {
                     value: "poly",
                     children: v.jsx(PoLy, {})
                 }), v.jsx(pn, {
-                    value: "mow",
-                    children: v.jsx(PoLy, {})
+                    value: "trim",
+                    children: v.jsx(mow, {})
                 }), v.jsx(pn, {
-                    value: "mud",
-                    children: v.jsx(PoLy, {})
+                    value: "race",
+                    children: v.jsx(mud, {})
                 })]
             }), v.jsx(Gv, {})]
         })]
