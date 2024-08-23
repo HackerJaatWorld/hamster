@@ -11702,7 +11702,7 @@ function mud() {
                   onClick: async function generateCodes() {
                      try {
                         setCodes([null, null, null, null]), setCurrentStatus("wait"), setProgress(0);
-                        const newCodes = await Promise.all([mow3.generate(), mow3.generate(), mow3.generate(), mow3.generate()]);
+                        const newCodes = await Promise.all([mud3.generate(), mud3.generate(), mud3.generate(), mud3.generate()]);
                         setCodes(newCodes), setCurrentStatus("done"), setProgress(100);
                         const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
                         const newCount = generatedCodeCount + 4;
@@ -11785,15 +11785,15 @@ function M0() {
                   disabled: "wait" === e,
                   children: "Poly"
                }), v.jsx(fn, {
-                  value: "mow",
+                  value: "trim",
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
-                  children: "Mow"
+                  children: "Trim"
                }), v.jsx(fn, {
-                  value: "mud",
+                  value: "race",
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
-                  children: "Mud"
+                  children: "Race"
                })]
             }), v.jsx(pn, {
                value: "bike",
@@ -11817,10 +11817,10 @@ function M0() {
                value: "poly",
                children: v.jsx(PoLy, {})
             }), v.jsx(pn, {
-               value: "mow",
+               value: "trim",
                children: v.jsx(mow, {})
             }), v.jsx(pn, {
-               value: "mud",
+               value: "race",
                children: v.jsx(mud, {})
             })]
          }), v.jsx(Gv, {})]
