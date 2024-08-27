@@ -10650,142 +10650,6 @@ function x0() {
 }
 
 
-
-const S0 = "74ee0b5b-775e-4bee-974f-63e7f4d5bacb",
-   k0 = "fe693b26-b342-4159-8808-15e3ff7f8767",
-   To = new ro(S0, k0);
-function _0() {
-   const [e, t] = x.useState([null, null, null, null]),
-      n = Ke(u => u.status),
-      r = Ke(u => u.setStatus),
-      [o, l] = x.useState(0),
-      {
-         copy: i
-      } = no();
-
-   const handleMore = () => {
-      console.log("Button was clicked!");
-
-      // Toggle the visibility
-      const root = document.getElementById("root");
-      const rootMore = document.getElementById("root_more");
-      rootMore.style.display = '';
-      root.style.display = 'none';
-   };
-
-   const copyAllCodes = () => {
-      const allCodes = e.filter(Boolean).join('\n');
-      if (allCodes) {
-         i(allCodes);
-         tt(v.jsxs("div", {
-            className: "flex justify-center items-center",
-            children: [
-               v.jsx(Jr, { size: 16, className: "mr-2" }),
-               " ",
-               v.jsx("span", { children: "All Codes Copied!" })
-            ]
-         }));
-      } else {
-         tt("No codes to copy");
-      }
-   };
-
-
-
-   return x.useEffect(() => {
-      if ("wait" !== n) return;
-      const u = setInterval(() => {
-         l(d => d < 100 ? d + 1 : (clearInterval(u), 100));
-      }, 1e3);
-      return () => clearInterval(u);
-   }, [n]), v.jsxs(Kn, {
-      children: [v.jsxs(Gn, {
-         children: [v.jsx(Qn, {
-            children: "My Clone Army"
-         }), v.jsxs(Yn, {
-            children: ["click ", v.jsx("b", {
-               children: "Generate"
-            }), " to use"]
-         })]
-      }), v.jsx(Xn, {
-         children: v.jsxs("ul", {
-            className: "space-y-2",
-            children: [e.map((u, d) => v.jsxs("li", {
-               className: "flex justify-between items-center gap-4",
-               children: [u ? v.jsx(to, {
-                  code: u
-               }) : v.jsx(eo, {
-                  animation: "wait" === n
-               }), v.jsx(He, {
-                  variant: "outline",
-                  size: "sm",
-                  onClick: () => function s(u) {
-                     i(u), tt(v.jsxs("div", {
-                        className: "flex justify-center items-center",
-                        children: [v.jsx(Jr, {
-                           size: 16,
-                           className: "mr-2"
-                        }), " ", v.jsx("span", {
-                           children: "Copied!"
-                        })]
-                     }));
-                  }(u),
-                  disabled: !u,
-                  children: v.jsx(Zr, {
-                     size: 12
-                  })
-               })]
-            }, d)), v.jsxs("p", {
-               className: "text-center font-medium mt-4",
-               children: [o, "%"]
-            }), v.jsx(Zn, {
-               value: o,
-               className: "progressbar"
-            })]
-         })
-      }),
-      v.jsxs("div", {
-         className: "flex gap-1",  // Adjust styling as needed
-         children: [
-            v.jsx(Jn, {
-               children: v.jsxs(He, {
-                  onClick: async function a() {
-                     try {
-                        t([null, null, null, null]), r("wait"), l(0);
-                        const u = await Promise.all([To.generate(), To.generate(), To.generate(), To.generate()]);
-                        t(u), r("done"), l(100);
-                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
-                        const newCount = generatedCodeCount + 4;
-                        localStorage.setItem('generatedCodeCount', newCount);
-
-                     } catch (u) {
-                        console.log("Error:", u);
-                        tt("Error");
-                        t([null, null, null, null]);
-                        r("idle");
-                        l(0);
-                     }
-                  },
-                  disabled: "wait" === n,
-                  children: [
-                     v.jsx(qr, { size: 16, className: "mr-2" }),
-                     "Generate"
-                  ]
-               })
-            }),
-            v.jsx(He, {
-               onClick: copyAllCodes,  // Ensure this is correctly spelled
-               children: "Copy All"
-            }),
-            v.jsx(He, {
-               onClick: handleMore,  // Ensure this is correctly spelled
-               children: "More"
-            })
-         ]
-      })
-      ]
-   });
-}
 const C0 = "d1690a07-3780-4068-810f-9b5bbf2931b2",
    E0 = "b4170868-cef0-424f-8eb9-be0622e8e8e3",
    Io = new ro(C0, E0);
@@ -11755,11 +11619,6 @@ function M0() {
                   disabled: "wait" === e,
                   children: "Bike"
                }), v.jsx(fn, {
-                  value: "clone",
-                  className: "font-bold text-foreground-muted",
-                  disabled: "wait" === e,
-                  children: "Clone"
-               }), v.jsx(fn, {
                   value: "cube",
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
@@ -11798,9 +11657,6 @@ function M0() {
             }), v.jsx(pn, {
                value: "bike",
                children: v.jsx(x0, {})
-            }), v.jsx(pn, {
-               value: "clone",
-               children: v.jsx(_0, {})
             }), v.jsx(pn, {
                value: "cube",
                children: v.jsx(N0, {})
