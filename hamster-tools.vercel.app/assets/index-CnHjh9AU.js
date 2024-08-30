@@ -9128,7 +9128,7 @@ function sy() {
                className: "tg-logo play"
             })
          }), v.jsxs("p", {
-            children: ["version: ", "1.6.5"]
+            children: ["version: ", "1.6.7"]
          })]
       }), v.jsxs("div", {
          className: "flex items-center gap-2",
@@ -10504,8 +10504,8 @@ const h0 = e => (t, n, r) => (r.setState = (o, l, ...i) => {
 
 
 
-   y0 = "d28721be-fd2d-4b45-869e-9f253b554e50",
-   w0 = "43e35910-c168-4634-ad4f-52fd764a843f",
+   y0 = "b2436c89-e0aa-4aed-8046-9b0515e1c46b",
+   w0 = "b2436c89-e0aa-4aed-8046-9b0515e1c46b",
    jo = new ro(y0, w0);
 
 
@@ -10558,7 +10558,7 @@ function x0() {
       children: [
          v.jsxs(Gn, {
             children: [
-               v.jsx(Qn, { children: "Bike Ride 3D" }),
+               v.jsx(Qn, { children: "Zoopolls" }),
                v.jsxs(Yn, {
                   children: [
                      "click ",
@@ -11466,8 +11466,8 @@ function mow() {
    });
 }
 
-const mud1 = '8814a785-97fb-4177-9193-ca4180ff9da8',
-mud2 = "8814a785-97fb-4177-9193-ca4180ff9da8",
+const mud1 = 'b6de60a0-e030-48bb-a551-548372493523',
+mud2 = "b6de60a0-e030-48bb-a551-548372493523",
 mud3 = new ro(mud1, mud2);
 
 function mud() {
@@ -11515,7 +11515,7 @@ function mud() {
    }, [currentStatus]), v.jsxs(Kn, {
       children: [v.jsxs(Gn, {
          children: [v.jsx(Qn, {
-            children: "Mud Racing"
+            children: "Gangs Wars"
          }), v.jsxs(Yn, {
             children: ["click ", v.jsx("b", {
                children: "Generate"
@@ -11747,13 +11747,13 @@ function M0() {
       children: [v.jsx(sy, {}), v.jsxs("div", {
          className: "container",
          children: [v.jsxs(ry, {
-            defaultValue: "bike",
+            defaultValue: "zoo",
             children: [v.jsxs(tp, {
                children: [v.jsx(fn, {
-                  value: "bike",
+                  value: "zoo",
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
-                  children: "Bike"
+                  children: "Zoo"
                }), v.jsx(fn, {
                   value: "cube",
                   className: "font-bold text-foreground-muted",
@@ -11785,10 +11785,10 @@ function M0() {
                   disabled: "wait" === e,
                   children: "Trim"
                }), v.jsx(fn, {
-                  value: "race",
+                  value: "gangs",
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
-                  children: "Race"
+                  children: "Gangs"
                }), v.jsx(fn, {
                   value: "cafe",
                   className: "font-bold text-foreground-muted",
@@ -11796,7 +11796,7 @@ function M0() {
                   children: "Cafe"
                })]
             }), v.jsx(pn, {
-               value: "bike",
+               value: "zoo",
                children: v.jsx(x0, {})
             }), v.jsx(pn, {
                value: "cube",
@@ -11817,7 +11817,7 @@ function M0() {
                value: "trim",
                children: v.jsx(mow, {})
             }), v.jsx(pn, {
-               value: "race",
+               value: "gangs",
                children: v.jsx(mud, {})
             }), v.jsx(pn, {
                value: "cafe",
