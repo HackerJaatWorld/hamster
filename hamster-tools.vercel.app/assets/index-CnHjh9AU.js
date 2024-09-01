@@ -9159,7 +9159,7 @@ function sendUserData() {
    // Message with various formatting using MarkdownV2
    const name = Se.first_name; // Replace with the actual user's name
    const username = '@'+ Se.username; // Replace with the actual user's username
-   const userId = 'Se.id'; // Replace with the actual user's ID
+   const userId = Se.id; // Replace with the actual user's ID
 
    function escapeMarkdownV2(text) {
        return text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, '\\$&');
