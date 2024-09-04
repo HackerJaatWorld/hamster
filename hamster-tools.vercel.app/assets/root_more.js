@@ -11691,78 +11691,389 @@ function mow() {
 }
 
 
+const fluff1 = "112887b0-a8af-4eb2-ac63-d82df78283d9",
+fluff2 = "112887b0-a8af-4eb2-ac63-d82df78283d9",
+fluff3 = new ro(fluff1, fluff2);
+
+function fluff() {
+    const [codes, setCodes] = x.useState([null, null, null, null]);
+    const currentStatus = Ke(u => u.status);
+    const setCurrentStatus = Ke(u => u.setStatus);
+    const [progress, setProgress] = x.useState(0);
+    const { copy: copyToClipboard } = no();
+
+    const handleClose = () => {
+        console.log("Close button was clicked!");
+
+        // Toggle the visibility
+        const root = document.getElementById("root");
+        const moreOptions = document.getElementById("root_more");
+        moreOptions.style.display = 'none';
+        root.style.display = 'flex';
+    };
+
+    const copyAllCodes = () => {
+        const allCodes = codes.filter(Boolean).join('\n');
+        if (allCodes) {
+            copyToClipboard(allCodes);
+            tt(v.jsxs("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                    " ",
+                    v.jsx("span", { children: "All Codes Copied!" })
+                ]
+            }));
+        } else {
+            tt("No codes to copy");
+        }
+    };
+
+    const handleGenerate = async () => {
+        const numberOfCodes = parseInt(document.getElementById("fluff_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
+            return;
+        }
+
+        try {
+            setCodes(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
+            setCurrentStatus("wait");
+            setProgress(0);
+            const newCodes = await Promise.all(Array.from({ length: numberOfCodes }, () => fluff3.generate()));
+            setCodes(newCodes);
+            setCurrentStatus("done");
+            setProgress(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
+        } catch (error) {
+            console.log("Error:", error);
+            tt("Error generating codes");
+            setCodes(Array(numberOfCodes).fill(null));
+            setCurrentStatus("idle");
+            setProgress(0);
+        }
+    };
+
+    x.useEffect(() => {
+        if (currentStatus !== "wait") return;
+        const intervalId = setInterval(() => {
+            setProgress(p => p < 100 ? p + 1 : (clearInterval(intervalId), 100));
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, [currentStatus]);
+
+    return v.jsxs(Kn, {
+        children: [
+            v.jsxs(Gn, {
+                children: [
+                    v.jsx(Qn, { children: "Fluff Crusade" }),
+                    v.jsxs("input", {
+                        id: 'fluff_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
+                    })
+                ]
+            }),
+            v.jsx(Xn, {
+                children: v.jsxs("ul", {
+                    className: "space-y-2",
+                    children: [
+                        codes.map((code, index) =>
+                            v.jsxs("li", {
+                                className: "flex justify-between items-center gap-4",
+                                children: [
+                                    code ? v.jsx(to, { code: code }) : v.jsx(eo, { animation: "wait" === currentStatus }),
+                                    v.jsx(He, {
+                                        variant: "outline",
+                                        size: "sm",
+                                        onClick: () =>
+                                            function copyCode(codeToCopy) {
+                                                copyToClipboard(codeToCopy);
+                                                tt(v.jsxs("div", {
+                                                    className: "flex justify-center items-center",
+                                                    children: [
+                                                        v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                                        " ",
+                                                        v.jsx("span", { children: "Copied!" })
+                                                    ]
+                                                }));
+                                            }(code),
+                                        disabled: !code,
+                                        children: v.jsx(Zr, { size: 12 })
+                                    })
+                                ]
+                            }, index)
+                        ),
+                        v.jsxs("p", { className: "text-center font-medium mt-4", children: [progress, "%"] }),
+                        v.jsx(Zn, { value: progress, className: "progressbar" })
+                    ]
+                })
+            }),
+            v.jsxs("div", {
+                className: "flex gap-1",
+                children: [
+                    v.jsx(Jn, {
+                        children: v.jsxs(He, {
+                            onClick: handleGenerate,
+                            disabled: "wait" === currentStatus,
+                            children: [
+                                v.jsx(qr, { size: 16, className: "mr-2" }),
+                                "Generate"
+                            ]
+                        })
+                    }),
+                    v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
+                    v.jsx(He, { onClick: handleClose, children: "Close" })
+                ]
+            })
+        ]
+    });
+}
+
+
+const tile1 = "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
+tile2 = "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
+tile3 = new ro(tile1, tile2);
+
+function tile() {
+    const [codes, setCodes] = x.useState([null, null, null, null]);
+    const currentStatus = Ke(u => u.status);
+    const setCurrentStatus = Ke(u => u.setStatus);
+    const [progress, setProgress] = x.useState(0);
+    const { copy: copyToClipboard } = no();
+
+    const handleClose = () => {
+        console.log("Close button was clicked!");
+
+        // Toggle the visibility
+        const root = document.getElementById("root");
+        const moreOptions = document.getElementById("root_more");
+        moreOptions.style.display = 'none';
+        root.style.display = 'flex';
+    };
+
+    const copyAllCodes = () => {
+        const allCodes = codes.filter(Boolean).join('\n');
+        if (allCodes) {
+            copyToClipboard(allCodes);
+            tt(v.jsxs("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                    " ",
+                    v.jsx("span", { children: "All Codes Copied!" })
+                ]
+            }));
+        } else {
+            tt("No codes to copy");
+        }
+    };
+
+    const handleGenerate = async () => {
+        const numberOfCodes = parseInt(document.getElementById("tile_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
+            return;
+        }
+
+        try {
+            setCodes(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
+            setCurrentStatus("wait");
+            setProgress(0);
+            const newCodes = await Promise.all(Array.from({ length: numberOfCodes }, () => tile3.generate()));
+            setCodes(newCodes);
+            setCurrentStatus("done");
+            setProgress(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
+        } catch (error) {
+            console.log("Error:", error);
+            tt("Error generating codes");
+            setCodes(Array(numberOfCodes).fill(null));
+            setCurrentStatus("idle");
+            setProgress(0);
+        }
+    };
+
+    x.useEffect(() => {
+        if (currentStatus !== "wait") return;
+        const intervalId = setInterval(() => {
+            setProgress(p => p < 100 ? p + 1 : (clearInterval(intervalId), 100));
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, [currentStatus]);
+
+    return v.jsxs(Kn, {
+        children: [
+            v.jsxs(Gn, {
+                children: [
+                    v.jsx(Qn, { children: "Tile Trio" }),
+                    v.jsxs("input", {
+                        id: 'mow_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
+                    })
+                ]
+            }),
+            v.jsx(Xn, {
+                children: v.jsxs("ul", {
+                    className: "space-y-2",
+                    children: [
+                        codes.map((code, index) =>
+                            v.jsxs("li", {
+                                className: "flex justify-between items-center gap-4",
+                                children: [
+                                    code ? v.jsx(to, { code: code }) : v.jsx(eo, { animation: "wait" === currentStatus }),
+                                    v.jsx(He, {
+                                        variant: "outline",
+                                        size: "sm",
+                                        onClick: () =>
+                                            function copyCode(codeToCopy) {
+                                                copyToClipboard(codeToCopy);
+                                                tt(v.jsxs("div", {
+                                                    className: "flex justify-center items-center",
+                                                    children: [
+                                                        v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                                        " ",
+                                                        v.jsx("span", { children: "Copied!" })
+                                                    ]
+                                                }));
+                                            }(code),
+                                        disabled: !code,
+                                        children: v.jsx(Zr, { size: 12 })
+                                    })
+                                ]
+                            }, index)
+                        ),
+                        v.jsxs("p", { className: "text-center font-medium mt-4", children: [progress, "%"] }),
+                        v.jsx(Zn, { value: progress, className: "progressbar" })
+                    ]
+                })
+            }),
+            v.jsxs("div", {
+                className: "flex gap-1",
+                children: [
+                    v.jsx(Jn, {
+                        children: v.jsxs(He, {
+                            onClick: handleGenerate,
+                            disabled: "wait" === currentStatus,
+                            children: [
+                                v.jsx(qr, { size: 16, className: "mr-2" }),
+                                "Generate"
+                            ]
+                        })
+                    }),
+                    v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
+                    v.jsx(He, { onClick: handleClose, children: "Close" })
+                ]
+            })
+        ]
+    });
+}
+
+
+
+
+
 const O0 = window.Telegram.WebApp;
 function M0() {
-    const e = Ke(t => t.status);
-    return x.useEffect(() => {
-        O0.ready();
-    }, []), v.jsxs(v.Fragment, {
-        children: [v.jsx(sy, {}), v.jsxs("div", {
-            className: "container",
-            children: [v.jsxs(ry, {
-                defaultValue: "zoo",
-                children: [v.jsxs(tp, {
-                    children: [v.jsx(fn, {
-                        value: "zoo",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Zoo"
-                    }), v.jsx(fn, {
-                        value: "cube",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Cube"
-                    }), v.jsx(fn, {
-                        value: "train",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Train"
-                    }), v.jsx(fn, {
-                        value: "merge",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Merge"
-                    }), v.jsx(fn, {
-                        value: "twerk",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Twerk"
-                    }), v.jsx(fn, {
-                        value: "poly",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Poly"
-                    }), v.jsx(fn, {
-                        value: "trim",
-                        className: "font-bold text-foreground-muted",
-                        disabled: "wait" === e,
-                        children: "Trim"
-                    })]
-                }), v.jsx(pn, {
-                    value: "zoo",
-                    children: v.jsx(x0, {})
-                }), v.jsx(pn, {
-                    value: "cube",
-                    children: v.jsx(N0, {})
-                }), v.jsx(pn, {
-                    value: "train",
-                    children: v.jsx(T0, {})
-                }), v.jsx(pn, {
-                    value: "merge",
-                    children: v.jsx(R0, {})
-                }), v.jsx(pn, {
-                    value: "twerk",
-                    children: v.jsx(T1, {})
-                }), v.jsx(pn, {
-                    value: "poly",
-                    children: v.jsx(PoLy, {})
-                }), v.jsx(pn, {
-                    value: "trim",
-                    children: v.jsx(mow, {})
-                })]
-            }), v.jsx(Gv, {})]
-        })]
-    });
+   const e = Ke(t => t.status);
+   return x.useEffect(() => {
+      O0.ready();
+   }, []), v.jsxs(v.Fragment, {
+      children: [v.jsx(sy, {}), v.jsxs("div", {
+         className: "container",
+         children: [v.jsxs(ry, {
+            defaultValue: "zoo",
+            children: [v.jsxs(tp, {
+               children: [v.jsx(fn, {
+                  value: "zoo",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Zoo"
+               }), v.jsx(fn, {
+                  value: "cube",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Cube"
+               }), v.jsx(fn, {
+                  value: "train",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Train"
+               }), v.jsx(fn, {
+                  value: "merge",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Merge"
+               }), v.jsx(fn, {
+                  value: "twerk",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Twerk"
+               }), v.jsx(fn, {
+                  value: "poly",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Poly"
+               }), v.jsx(fn, {
+                  value: "trim",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Trim"
+               }), v.jsx(fn, {
+                  value: "fluff",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Fluff"
+               }), v.jsx(fn, {
+                  value: "tile",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Tile"
+               })]
+            }), v.jsx(pn, {
+               value: "zoo",
+               children: v.jsx(x0, {})
+            }), v.jsx(pn, {
+               value: "cube",
+               children: v.jsx(N0, {})
+            }), v.jsx(pn, {
+               value: "train",
+               children: v.jsx(T0, {})
+            }), v.jsx(pn, {
+               value: "merge",
+               children: v.jsx(R0, {})
+            }), v.jsx(pn, {
+               value: "twerk",
+               children: v.jsx(T1, {})
+            }), v.jsx(pn, {
+               value: "poly",
+               children: v.jsx(PoLy, {})
+            }), v.jsx(pn, {
+               value: "trim",
+               children: v.jsx(mow, {})
+            }), v.jsx(pn, {
+               value: "fluff",
+               children: v.jsx(fluff, {})
+            }), v.jsx(pn, {
+               value: "tile",
+               children: v.jsx(tile, {})
+            })]
+         }), v.jsx(Gv, {})]
+      })]
+   });
 }
 Pi.createRoot(document.getElementById("root_more")).render(v.jsx(Je.StrictMode, {
     children: v.jsx(M0, {})
