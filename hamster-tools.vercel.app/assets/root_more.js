@@ -9128,7 +9128,7 @@ function sy() {
                     className: "tg-logo play"
                 })
             }), v.jsxs("p", {
-                children: ["version: ", "1.7.0"]
+                children: ["version: ", "1.7.1"]
             })]
         }), v.jsxs("div", {
             className: "flex items-center gap-2",
@@ -11920,7 +11920,7 @@ function tile() {
                 children: [
                     v.jsx(Qn, { children: "Tile Trio" }),
                     v.jsxs("input", {
-                        id: 'mow_num_of_code',
+                        id: 'tile_num_of_code',
                         className: 'number_of_code',
                         placeholder: 'Enter the number of codes (1-30)'
                     })
