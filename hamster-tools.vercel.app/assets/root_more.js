@@ -11985,6 +11985,154 @@ function tile() {
 
 
 
+const stone1 = "",
+stone2 = "",
+stone3 = new ro(stone1, stone2);
+
+function stone() {
+    const [codes, setCodes] = x.useState([null, null, null, null]);
+    const currentStatus = Ke(u => u.status);
+    const setCurrentStatus = Ke(u => u.setStatus);
+    const [progress, setProgress] = x.useState(0);
+    const { copy: copyToClipboard } = no();
+
+    const handleClose = () => {
+        console.log("Close button was clicked!");
+
+        // Toggle the visibility
+        const root = document.getElementById("root");
+        const moreOptions = document.getElementById("root_more");
+        moreOptions.style.display = 'none';
+        root.style.display = 'flex';
+    };
+
+    const copyAllCodes = () => {
+        const allCodes = codes.filter(Boolean).join('\n');
+        if (allCodes) {
+            copyToClipboard(allCodes);
+            tt(v.jsxs("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                    " ",
+                    v.jsx("span", { children: "All Codes Copied!" })
+                ]
+            }));
+        } else {
+            tt("No codes to copy");
+        }
+    };
+
+    const handleGenerate = async () => {
+        const numberOfCodes = parseInt(document.getElementById("stone_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
+            return;
+        }
+
+        try {
+            setCodes(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
+            setCurrentStatus("wait");
+            setProgress(0);
+            const newCodes = await Promise.all(Array.from({ length: numberOfCodes }, () => stone3.generate()));
+            setCodes(newCodes);
+            setCurrentStatus("done");
+            setProgress(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
+        } catch (error) {
+            console.log("Error:", error);
+            tt("Error generating codes");
+            setCodes(Array(numberOfCodes).fill(null));
+            setCurrentStatus("idle");
+            setProgress(0);
+        }
+    };
+
+    x.useEffect(() => {
+        if (currentStatus !== "wait") return;
+        const intervalId = setInterval(() => {
+            setProgress(p => p < 100 ? p + 1 : (clearInterval(intervalId), 100));
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, [currentStatus]);
+
+    return v.jsxs(Kn, {
+        children: [
+            v.jsxs(Gn, {
+                children: [
+                    v.jsx(Qn, { children: "Stone Age (comming soon)" }),
+                    v.jsxs("input", {
+                        id: 'stone_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
+                    })
+                ]
+            }),
+            v.jsx(Xn, {
+                children: v.jsxs("ul", {
+                    className: "space-y-2",
+                    children: [
+                        codes.map((code, index) =>
+                            v.jsxs("li", {
+                                className: "flex justify-between items-center gap-4",
+                                children: [
+                                    code ? v.jsx(to, { code: code }) : v.jsx(eo, { animation: "wait" === currentStatus }),
+                                    v.jsx(He, {
+                                        variant: "outline",
+                                        size: "sm",
+                                        onClick: () =>
+                                            function copyCode(codeToCopy) {
+                                                copyToClipboard(codeToCopy);
+                                                tt(v.jsxs("div", {
+                                                    className: "flex justify-center items-center",
+                                                    children: [
+                                                        v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                                        " ",
+                                                        v.jsx("span", { children: "Copied!" })
+                                                    ]
+                                                }));
+                                            }(code),
+                                        disabled: !code,
+                                        children: v.jsx(Zr, { size: 12 })
+                                    })
+                                ]
+                            }, index)
+                        ),
+                        v.jsxs("p", { className: "text-center font-medium mt-4", children: [progress, "%"] }),
+                        v.jsx(Zn, { value: progress, className: "progressbar" })
+                    ]
+                })
+            }),
+            v.jsxs("div", {
+                className: "flex gap-1",
+                children: [
+                    v.jsx(Jn, {
+                        children: v.jsxs(He, {
+                            onClick: handleGenerate,
+                            disabled: "wait" === currentStatus,
+                            children: [
+                                v.jsx(qr, { size: 16, className: "mr-2" }),
+                                "Generate"
+                            ]
+                        })
+                    }),
+                    v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
+                    v.jsx(He, { onClick: handleClose, children: "Close" })
+                ]
+            })
+        ]
+    });
+}
+
+
+
+
 
 const O0 = window.Telegram.WebApp;
 function M0() {
@@ -12042,6 +12190,11 @@ function M0() {
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
                   children: "Tile"
+               }), v.jsx(fn, {
+                  value: "stone",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Stone"
                })]
             }), v.jsx(pn, {
                value: "zoo",
@@ -12070,6 +12223,9 @@ function M0() {
             }), v.jsx(pn, {
                value: "tile",
                children: v.jsx(tile, {})
+            }), v.jsx(pn, {
+               value: "stone",
+               children: v.jsx(stone, {})
             })]
          }), v.jsx(Gv, {})]
       })]
