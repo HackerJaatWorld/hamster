@@ -11985,8 +11985,8 @@ function tile() {
 
 
 
-const stone1 = "",
-stone2 = "",
+const stone1 = "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
+stone2 = "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
 stone3 = new ro(stone1, stone2);
 
 function stone() {
@@ -12066,7 +12066,7 @@ function stone() {
         children: [
             v.jsxs(Gn, {
                 children: [
-                    v.jsx(Qn, { children: "Stone Age (comming soon)" }),
+                    v.jsx(Qn, { children: "Stone Age" }),
                     v.jsxs("input", {
                         id: 'stone_num_of_code',
                         className: 'number_of_code',
