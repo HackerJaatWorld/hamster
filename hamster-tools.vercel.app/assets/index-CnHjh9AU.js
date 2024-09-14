@@ -11197,8 +11197,8 @@ function T1() {
 }
 
 const pol1 = "2aaf5aee-2cbc-47ec-8a3f-0962cc14bc71",
-    pol2 = "2aaf5aee-2cbc-47ec-8a3f-0962cc14bc71",
-    pol3 = new ro(pol1, pol2);
+   pol2 = "2aaf5aee-2cbc-47ec-8a3f-0962cc14bc71",
+   pol3 = new ro(pol1, pol2);
 
 function PoLy() {
    const [codes, setCodes] = x.useState([null, null, null, null]),
@@ -11334,8 +11334,8 @@ function PoLy() {
 
 
 const fluff1 = "112887b0-a8af-4eb2-ac63-d82df78283d9",
-fluff2 = "112887b0-a8af-4eb2-ac63-d82df78283d9",
-fluff3 = new ro(fluff1, fluff2);
+   fluff2 = "112887b0-a8af-4eb2-ac63-d82df78283d9",
+   fluff3 = new ro(fluff1, fluff2);
 
 function fluff() {
    const [codes, setCodes] = x.useState([null, null, null, null]),
@@ -11469,8 +11469,8 @@ function fluff() {
 }
 
 const tile1 = "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
-tile2 = "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
-tile3 = new ro(tile1, tile2);
+   tile2 = "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
+   tile3 = new ro(tile1, tile2);
 
 function tile() {
    const [codes, setCodes] = x.useState([null, null, null, null]),
@@ -11604,8 +11604,8 @@ function tile() {
 }
 
 const stone1 = "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
-stone2 = "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
-stone3 = new ro(stone1, stone2);
+   stone2 = "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
+   stone3 = new ro(stone1, stone2);
 
 function stone() {
    const [codes, setCodes] = x.useState([null, null, null, null]),
@@ -11738,8 +11738,8 @@ function stone() {
    });
 }
 const mow1 = "ef319a80-949a-492e-8ee0-424fb5fc20a6",
-mow2 = "ef319a80-949a-492e-8ee0-424fb5fc20a6",
-mow3 = new ro(mow1, mow2);
+   mow2 = "ef319a80-949a-492e-8ee0-424fb5fc20a6",
+   mow3 = new ro(mow1, mow2);
 
 function mow() {
    const [codes, setCodes] = x.useState([null, null, null, null]),
@@ -11873,8 +11873,8 @@ function mow() {
 }
 
 const bouncemasters1 = "bc72d3b9-8e91-4884-9c33-f72482f0db37",
-bouncemasters2 = "bc72d3b9-8e91-4884-9c33-f72482f0db37",
-bouncemasters3 = new ro(bouncemasters1, bouncemasters2);
+   bouncemasters2 = "bc72d3b9-8e91-4884-9c33-f72482f0db37",
+   bouncemasters3 = new ro(bouncemasters1, bouncemasters2);
 
 function bouncemasters() {
    const [codes, setCodes] = x.useState([null, null, null, null]),
@@ -12008,6 +12008,141 @@ function bouncemasters() {
 }
 
 
+const ball1 = "4bf4966c-4d22-439b-8ff2-dc5ebca1a600",
+   ball2 = "4bf4966c-4d22-439b-8ff2-dc5ebca1a600",
+   ball3 = new ro(ball1, ball2);
+
+function ball() {
+   const [codes, setCodes] = x.useState([null, null, null, null]),
+      currentStatus = Ke(u => u.status),
+      setCurrentStatus = Ke(u => u.setStatus),
+      [progress, setProgress] = x.useState(0),
+      {
+         copy: copyToClipboard
+      } = no();
+
+   const showMoreOptions = () => {
+      console.log("More Options Button Clicked!");
+
+      // Toggle the visibility
+      const root = document.getElementById("root");
+      const moreOptions = document.getElementById("root_more");
+      moreOptions.style.display = '';
+      root.style.display = 'none';
+   };
+
+   const copyAllCodes = () => {
+      const allCodes = codes.filter(Boolean).join('\n');
+      if (allCodes) {
+         copyToClipboard(allCodes);
+         tt(v.jsxs("div", {
+            className: "flex justify-center items-center",
+            children: [
+               v.jsx(Jr, { size: 16, className: "mr-2" }),
+               " ",
+               v.jsx("span", { children: "All Codes Copied!" })
+            ]
+         }));
+      } else {
+         tt("No codes to copy");
+      }
+   };
+
+   return x.useEffect(() => {
+      if ("wait" !== currentStatus) return;
+      const intervalId = setInterval(() => {
+         setProgress(p => p < 100 ? p + 1 : (clearInterval(intervalId), 100));
+      }, 1000);
+      return () => clearInterval(intervalId);
+   }, [currentStatus]), v.jsxs(Kn, {
+      children: [v.jsxs(Gn, {
+         children: [v.jsx(Qn, {
+            children: "Hide Ball"
+         }), v.jsxs(Yn, {
+            children: ["click ", v.jsx("b", {
+               children: "Generate"
+            }), " to use"]
+         })]
+      }), v.jsx(Xn, {
+         children: v.jsxs("ul", {
+            className: "space-y-2",
+            children: [codes.map((code, index) => v.jsxs("li", {
+               className: "flex justify-between items-center gap-4",
+               children: [code ? v.jsx(to, {
+                  code: code
+               }) : v.jsx(eo, {
+                  animation: "wait" === currentStatus
+               }), v.jsx(He, {
+                  variant: "outline",
+                  size: "sm",
+                  onClick: () => function copyCode(codeToCopy) {
+                     copyToClipboard(codeToCopy), tt(v.jsxs("div", {
+                        className: "flex justify-center items-center",
+                        children: [v.jsx(Jr, {
+                           size: 16,
+                           className: "mr-2"
+                        }), " ", v.jsx("span", {
+                           children: "Copied!"
+                        })]
+                     }));
+                  }(code),
+                  disabled: !code,
+                  children: v.jsx(Zr, {
+                     size: 12
+                  })
+               })]
+            }, index)), v.jsxs("p", {
+               className: "text-center font-medium mt-4",
+               children: [progress, "%"]
+            }), v.jsx(Zn, {
+               value: progress,
+               className: "progressbar"
+            })]
+         })
+      }),
+      v.jsxs("div", {
+         className: "flex gap-1",
+         children: [
+            v.jsx(Jn, {
+               children: v.jsxs(He, {
+                  onClick: async function generateCodes() {
+                     try {
+                        setCodes([null, null, null, null]), setCurrentStatus("wait"), setProgress(0);
+                        const newCodes = await Promise.all([ball3.generate(), ball3.generate(), ball3.generate(), ball3.generate()]);
+                        setCodes(newCodes), setCurrentStatus("done"), setProgress(100);
+                        const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+                        const newCount = generatedCodeCount + 4;
+                        localStorage.setItem('generatedCodeCount', newCount);
+
+                     } catch (error) {
+                        console.log("Error:", error);
+                        tt("Error");
+                        setCodes([null, null, null, null]);
+                        setCurrentStatus("idle");
+                        setProgress(0);
+                     }
+                  },
+                  disabled: "wait" === currentStatus,
+                  children: [
+                     v.jsx(qr, { size: 16, className: "mr-2" }),
+                     "Generate"
+                  ]
+               })
+            }),
+            v.jsx(He, {
+               onClick: copyAllCodes,
+               children: "Copy All"
+            }),
+            v.jsx(He, {
+               onClick: showMoreOptions,
+               children: "More"
+            })
+         ]
+      })
+      ]
+   });
+}
+
 
 
 const O0 = window.Telegram.WebApp;
@@ -12076,6 +12211,11 @@ function M0() {
                   className: "font-bold text-foreground-muted",
                   disabled: "wait" === e,
                   children: "Master"
+               }), v.jsx(fn, {
+                  value: "ball",
+                  className: "font-bold text-foreground-muted",
+                  disabled: "wait" === e,
+                  children: "Ball"
                })]
             }), v.jsx(pn, {
                value: "zoo",
@@ -12107,9 +12247,12 @@ function M0() {
             }), v.jsx(pn, {
                value: "stone",
                children: v.jsx(stone, {})
-}), v.jsx(pn, {
+            }), v.jsx(pn, {
                value: "bouncemasters",
                children: v.jsx(bouncemasters, {})
+            }), v.jsx(pn, {
+               value: "ball",
+               children: v.jsx(ball, {})
             })]
          }), v.jsx(Gv, {})]
       })]
