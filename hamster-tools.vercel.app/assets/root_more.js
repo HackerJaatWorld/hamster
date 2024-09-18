@@ -9128,7 +9128,7 @@ function sy() {
                     className: "tg-logo play"
                 })
             }), v.jsxs("p", {
-                children: ["version: ", "1.7.8"]
+                children: ["version: ", "1.8.0"]
             })]
         }), v.jsxs("div", {
             className: "flex items-center gap-2",
@@ -12134,8 +12134,8 @@ function stone() {
 const bouncemasters1 = "bc72d3b9-8e91-4884-9c33-f72482f0db37",
     bouncemasters2 = "bc72d3b9-8e91-4884-9c33-f72482f0db37",
     bouncemasters3 = new ro(bouncemasters1, bouncemasters2);
-    
-    function bouncemasters() {
+
+function bouncemasters() {
     const game_id = 'bouncemasters';
     const game_full_name = 'Bouncemasters'
     const gamekey = bouncemasters3;
@@ -12174,7 +12174,305 @@ const bouncemasters1 = "bc72d3b9-8e91-4884-9c33-f72482f0db37",
     };
 
     const handleGenerate = async () => {
-        const numberOfCodes = parseInt(document.getElementById( game_id +  "_num_of_code").value);
+        const numberOfCodes = parseInt(document.getElementById(game_id + "_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
+            return;
+        }
+
+        try {
+            setCodes(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
+            setCurrentStatus("wait");
+            setProgress(0);
+            const newCodes = await Promise.all(Array.from({ length: numberOfCodes }, () => gamekey.generate()));
+            setCodes(newCodes);
+            setCurrentStatus("done");
+            setProgress(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
+        } catch (error) {
+            console.log("Error:", error);
+            tt("Error generating codes");
+            setCodes(Array(numberOfCodes).fill(null));
+            setCurrentStatus("idle");
+            setProgress(0);
+        }
+    };
+
+    x.useEffect(() => {
+        if (currentStatus !== "wait") return;
+        const intervalId = setInterval(() => {
+            setProgress(p => p < 100 ? p + 1 : (clearInterval(intervalId), 100));
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, [currentStatus]);
+
+    return v.jsxs(Kn, {
+        children: [
+            v.jsxs(Gn, {
+                children: [
+                    v.jsx(Qn, { children: game_full_name }),
+                    v.jsxs("input", {
+                        id: game_id + '_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
+                    })
+                ]
+            }),
+            v.jsx(Xn, {
+                children: v.jsxs("ul", {
+                    className: "space-y-2",
+                    children: [
+                        codes.map((code, index) =>
+                            v.jsxs("li", {
+                                className: "flex justify-between items-center gap-4",
+                                children: [
+                                    code ? v.jsx(to, { code: code }) : v.jsx(eo, { animation: "wait" === currentStatus }),
+                                    v.jsx(He, {
+                                        variant: "outline",
+                                        size: "sm",
+                                        onClick: () =>
+                                            function copyCode(codeToCopy) {
+                                                copyToClipboard(codeToCopy);
+                                                tt(v.jsxs("div", {
+                                                    className: "flex justify-center items-center",
+                                                    children: [
+                                                        v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                                        " ",
+                                                        v.jsx("span", { children: "Copied!" })
+                                                    ]
+                                                }));
+                                            }(code),
+                                        disabled: !code,
+                                        children: v.jsx(Zr, { size: 12 })
+                                    })
+                                ]
+                            }, index)
+                        ),
+                        v.jsxs("p", { className: "text-center font-medium mt-4", children: [progress, "%"] }),
+                        v.jsx(Zn, { value: progress, className: "progressbar" })
+                    ]
+                })
+            }),
+            v.jsxs("div", {
+                className: "flex gap-1",
+                children: [
+                    v.jsx(Jn, {
+                        children: v.jsxs(He, {
+                            onClick: handleGenerate,
+                            disabled: "wait" === currentStatus,
+                            children: [
+                                v.jsx(qr, { size: 16, className: "mr-2" }),
+                                "Generate"
+                            ]
+                        })
+                    }),
+                    v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
+                    v.jsx(He, { onClick: handleClose, children: "Close" })
+                ]
+            })
+        ]
+    });
+}
+
+const ball1 = "4bf4966c-4d22-439b-8ff2-dc5ebca1a600",
+   ball2 = "4bf4966c-4d22-439b-8ff2-dc5ebca1a600",
+   ball3 = new ro(ball1, ball2);
+
+function ball() {
+    const game_id = 'ball';
+    const game_full_name = 'Hide Ball'
+    const gamekey = ball3;
+
+    const [codes, setCodes] = x.useState([null, null, null, null]);
+    const currentStatus = Ke(u => u.status);
+    const setCurrentStatus = Ke(u => u.setStatus);
+    const [progress, setProgress] = x.useState(0);
+    const { copy: copyToClipboard } = no();
+
+    const handleClose = () => {
+        console.log("Close button was clicked!");
+
+        // Toggle the visibility
+        const root = document.getElementById("root");
+        const moreOptions = document.getElementById("root_more");
+        moreOptions.style.display = 'none';
+        root.style.display = 'flex';
+    };
+
+    const copyAllCodes = () => {
+        const allCodes = codes.filter(Boolean).join('\n');
+        if (allCodes) {
+            copyToClipboard(allCodes);
+            tt(v.jsxs("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                    " ",
+                    v.jsx("span", { children: "All Codes Copied!" })
+                ]
+            }));
+        } else {
+            tt("No codes to copy");
+        }
+    };
+
+    const handleGenerate = async () => {
+        const numberOfCodes = parseInt(document.getElementById(game_id + "_num_of_code").value);
+        if (isNaN(numberOfCodes)) {
+            tt("Please enter a number");
+            return;
+        } else if (numberOfCodes < 1 || numberOfCodes > 30) {
+            tt("Please enter a valid number between 1 and 30.");
+            return;
+        }
+
+        try {
+            setCodes(Array(numberOfCodes).fill(null)); // Reset state with the correct number of nulls
+            setCurrentStatus("wait");
+            setProgress(0);
+            const newCodes = await Promise.all(Array.from({ length: numberOfCodes }, () => gamekey.generate()));
+            setCodes(newCodes);
+            setCurrentStatus("done");
+            setProgress(100);
+            const generatedCodeCount = parseInt(localStorage.getItem('generatedCodeCount') || '0');
+            const newCount = generatedCodeCount + numberOfCodes;
+            localStorage.setItem('generatedCodeCount', newCount);
+
+        } catch (error) {
+            console.log("Error:", error);
+            tt("Error generating codes");
+            setCodes(Array(numberOfCodes).fill(null));
+            setCurrentStatus("idle");
+            setProgress(0);
+        }
+    };
+
+    x.useEffect(() => {
+        if (currentStatus !== "wait") return;
+        const intervalId = setInterval(() => {
+            setProgress(p => p < 100 ? p + 1 : (clearInterval(intervalId), 100));
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, [currentStatus]);
+
+    return v.jsxs(Kn, {
+        children: [
+            v.jsxs(Gn, {
+                children: [
+                    v.jsx(Qn, { children: game_full_name }),
+                    v.jsxs("input", {
+                        id: game_id + '_num_of_code',
+                        className: 'number_of_code',
+                        placeholder: 'Enter the number of codes (1-30)'
+                    })
+                ]
+            }),
+            v.jsx(Xn, {
+                children: v.jsxs("ul", {
+                    className: "space-y-2",
+                    children: [
+                        codes.map((code, index) =>
+                            v.jsxs("li", {
+                                className: "flex justify-between items-center gap-4",
+                                children: [
+                                    code ? v.jsx(to, { code: code }) : v.jsx(eo, { animation: "wait" === currentStatus }),
+                                    v.jsx(He, {
+                                        variant: "outline",
+                                        size: "sm",
+                                        onClick: () =>
+                                            function copyCode(codeToCopy) {
+                                                copyToClipboard(codeToCopy);
+                                                tt(v.jsxs("div", {
+                                                    className: "flex justify-center items-center",
+                                                    children: [
+                                                        v.jsx(Jr, { size: 16, className: "mr-2" }),
+                                                        " ",
+                                                        v.jsx("span", { children: "Copied!" })
+                                                    ]
+                                                }));
+                                            }(code),
+                                        disabled: !code,
+                                        children: v.jsx(Zr, { size: 12 })
+                                    })
+                                ]
+                            }, index)
+                        ),
+                        v.jsxs("p", { className: "text-center font-medium mt-4", children: [progress, "%"] }),
+                        v.jsx(Zn, { value: progress, className: "progressbar" })
+                    ]
+                })
+            }),
+            v.jsxs("div", {
+                className: "flex gap-1",
+                children: [
+                    v.jsx(Jn, {
+                        children: v.jsxs(He, {
+                            onClick: handleGenerate,
+                            disabled: "wait" === currentStatus,
+                            children: [
+                                v.jsx(qr, { size: 16, className: "mr-2" }),
+                                "Generate"
+                            ]
+                        })
+                    }),
+                    v.jsx(He, { onClick: copyAllCodes, children: "Copy All" }),
+                    v.jsx(He, { onClick: handleClose, children: "Close" })
+                ]
+            })
+        ]
+    });
+}
+
+const pin1 = "d2378baf-d617-417a-9d99-d685824335f0",
+   pin2 = "d2378baf-d617-417a-9d99-d685824335f0",
+   pin3 = new ro(pin1, pin2);
+
+function pin() {
+    const game_id = 'pin';
+    const game_full_name = 'Pin Out Master'
+    const gamekey = pin3;
+
+    const [codes, setCodes] = x.useState([null, null, null, null]);
+    const currentStatus = Ke(u => u.status);
+    const setCurrentStatus = Ke(u => u.setStatus);
+    const [progress, setProgress] = x.useState(0);
+    const { copy: copyToClipboard } = no();
+
+    const handleClose = () => {
+        console.log("Close button was clicked!");
+
+        // Toggle the visibility
+        const root = document.getElementById("root");
+        const moreOptions = document.getElementById("root_more");
+        moreOptions.style.display = 'none';
+        root.style.display = 'flex';
+    };
+
+    const copyAllCodes = () => {
+        const allCodes = codes.filter(Boolean).join('\n');
+        if (allCodes) {
+            copyToClipboard(allCodes);
+            tt(v.jsxs("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    v.jsx(Jr, { size: 16, className: "mr-2" }),
+                    " ",
+                    v.jsx("span", { children: "All Codes Copied!" })
+                ]
+            }));
+        } else {
+            tt("No codes to copy");
+        }
+    };
+
+    const handleGenerate = async () => {
+        const numberOfCodes = parseInt(document.getElementById(game_id + "_num_of_code").value);
         if (isNaN(numberOfCodes)) {
             tt("Please enter a number");
             return;
@@ -12347,6 +12645,16 @@ function M0() {
                         value: "bouncemasters",
                         className: "font-bold text-foreground-muted",
                         disabled: "wait" === e,
+                        children: "Bounce"
+                    }), v.jsx(fn, {
+                        value: "ball",
+                        className: "font-bold text-foreground-muted",
+                        disabled: "wait" === e,
+                        children: "Ball"
+                    }), v.jsx(fn, {
+                        value: "pin",
+                        className: "font-bold text-foreground-muted",
+                        disabled: "wait" === e,
                         children: "Master"
                     })]
                 }), v.jsx(pn, {
@@ -12382,6 +12690,12 @@ function M0() {
                 }), v.jsx(pn, {
                     value: "bouncemasters",
                     children: v.jsx(bouncemasters, {})
+                }), v.jsx(pn, {
+                    value: "ball",
+                    children: v.jsx(ball, {})
+                }), v.jsx(pn, {
+                    value: "pin",
+                    children: v.jsx(pin, {})
                 })]
             }), v.jsx(Gv, {})]
         })]
